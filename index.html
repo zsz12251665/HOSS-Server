@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<meta http-equiv="Cache-Control" content="no-cache" />
+		<meta name="viewport" content="width=device-width" />
+		<!-- <link rel="shortcut icon" href="/favicon.ico" /> -->
+		<title>SCUT 2019计科全英联合班作业提交系统</title>
+		<style type="text/css">
+body
+{
+	height: 100vh;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+header, footer
+{
+	flex-grow: 1;
+}
+section
+{
+	margin: 0.5em;
+}
+		</style>
+	</head>
+	<body>
+		<header></header>
+		<main>
+			<form action="upload.php" method="post" enctype="multipart/form-data">
+				<section>
+					<label for="StuName">学生姓名：</label>
+					<input type="text" name="StuName" id="StuName" />
+				</section>
+				<section>
+					<label for="StuNumber">学生学号：</label>
+					<input type="text" name="StuNumber" id="StuNumber" />
+				</section>
+				<section>
+					<label for="WorkTitle">作业内容：</label>
+					<select name="WorkTitle" id="WorkTitle">
+						<option value="Default">--请选择要提交的作业--</option>
+						<optgroup label="大物实验">
+							<option value="DWSY1">大物实验 - DIY实验报告</option>
+							<option value="DWSY2">大物实验 - 虚拟仿真实验报告</option>
+						</optgroup>
+						<optgroup label="大学物理">
+							<option value="DXWL1">大学物理 - 20200418</option>
+							<option value="DXWL2">大学物理 - 20200425</option>
+						</optgroup>
+					</select>
+				</section>
+				<section>
+					<label for="WorkFile">作业文件：</label>
+					<input type="file" name="WorkFile" id="WorkFile" />
+				</section>
+				<section style="text-align: center;">
+					<input type="submit" name="Submit" id="Submit" />
+				</section>
+			</form>
+		</main>
+		<footer></footer>
+	</body>
+</html>
