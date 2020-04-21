@@ -40,15 +40,14 @@ section
 				<section>
 					<label for="WorkTitle">作业内容：</label>
 					<select name="WorkTitle" id="WorkTitle">
-						<option value="Default">--请选择要提交的作业--</option>
-						<optgroup label="大物实验">
-							<option value="DWSY1">大物实验 - DIY实验报告</option>
-							<option value="DWSY2">大物实验 - 虚拟仿真实验报告</option>
-						</optgroup>
-						<optgroup label="大学物理">
-							<option value="DXWL1">大学物理 - 20200418</option>
-							<option value="DXWL2">大学物理 - 20200425</option>
-						</optgroup>
+						<option value="Default" selected="selected">--请选择要提交的作业--</option>
+<?php
+	require "sql.php";
+	foreach ($GLOBALS["homeworkList"] as $homework)
+	{
+		echo "<option value=\"" . htmlspecialchars($homework["directory"] ? $homework["directory"] : $homework["title"]) . "\">" . htmlspecialchars($homework["title"]) . "</option>";
+	}
+?>
 					</select>
 				</section>
 				<section>
