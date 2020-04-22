@@ -23,7 +23,7 @@ section
 {
 	margin: 0.5em;
 }
-input{
+input[type="text"]{
 	border: 1px solid #ccc;
 	padding: 7px 0px;
 	border-radius: 3px;
