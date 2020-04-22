@@ -43,3 +43,10 @@ This is a homework collecting server built for the 2019 Selected Class of Comput
 - 将存储目录放入配置文件（`local.php`）中
 - 在README中增加了注意事项
 - 将作业目录加入MySQL数据库
+
+### 快照2020-0422-2343
+
+- 美化了上传页面
+- 增加了404错误页面
+- 修复了一位学生可以提交多个后缀名各不相同的文件的BUG
+- TO-DO：增加管理页面及打包下载页面
