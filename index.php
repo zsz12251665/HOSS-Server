@@ -25,9 +25,10 @@ section
 }
 		</style>
 	</head>
-	<body>
+	<body background="img/background.png">
 		<header></header>
 		<main>
+			<h1 align="center">SCUT 2019计科全英联合班作业提交系统</h1>
 			<form action="upload.php" method="post" enctype="multipart/form-data">
 				<section>
 					<label for="StuName">学生姓名：</label>
