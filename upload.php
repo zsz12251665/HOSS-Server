@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 		<meta http-equiv="Cache-Control" content="no-cache" />
 		<meta name="viewport" content="width=device-width" />
-		<!-- <link rel="shortcut icon" href="/favicon.ico" /> -->
+		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 		<title>SCUT 2019计科全英联合班作业提交系统</title>
 	</head>
@@ -34,7 +34,15 @@
 		{
 			mkdir($upload_directory . $_POST["WorkTitle"] . "/", 0777);
 		}
-		$savingLocation = $upload_directory . $_POST["WorkTitle"] . "/" . $_POST["StuName"] . "-" . $_POST["StuNumber"] . "." . strtolower(pathinfo($_FILES["WorkFile"]["name"], PATHINFO_EXTENSION));
+		$fileList = scandir($upload_directory . $_POST["WorkTitle"] . "/");
+		foreach ($fileList as $fileName)// Remove the existing file
+		{
+			if (pathinfo($fileName, PATHINFO_FILENAME) == $_POST["StuNumber"] . "-" . $_POST["StuName"])
+			{
+				unlink($upload_directory . $_POST["WorkTitle"] . "/" . $fileName);
+			}
+		}
+		$savingLocation = $upload_directory . $_POST["WorkTitle"] . "/" . $_POST["StuNumber"] . "-" . $_POST["StuName"] . "." . strtolower(pathinfo($_FILES["WorkFile"]["name"], PATHINFO_EXTENSION));
 		if(move_uploaded_file($_FILES["WorkFile"]["tmp_name"], $savingLocation))
 		{
 			echo "<p>Upload successfully! </p>";
