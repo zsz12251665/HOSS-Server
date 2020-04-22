@@ -29,7 +29,9 @@
 	require "sql.php";
 	foreach (array_reverse($GLOBALS["homeworkList"]) as $homework)
 	{
-		echo "<option value=\"" . htmlspecialchars($homework["directory"] ? $homework["directory"] : $homework["title"]) . "\">" . htmlspecialchars($homework["title"]) . "</option>";
+		$directory = htmlspecialchars($homework["directory"] ? $homework["directory"] : $homework["title"]);
+		$title = htmlspecialchars($homework["title"]);
+		echo "<option value=\"" . $directory . "\">" . $title . "</option>";
 	}
 ?>
 					</select>

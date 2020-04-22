@@ -3,7 +3,7 @@
 	$mysqlConnection = mysqli_connect($mysql_server, $mysql_username, $mysql_password);
 	if (!$mysqlConnection)
 	{
-		die("Could not connect! " . mysqli_error($mysqlConnection));
+		die("<p>Could not connect! " . mysqli_error($mysqlConnection) . "</p>");
 	}
 	mysqli_select_db($mysqlConnection, "homework");
 	$mysqlResult = mysqli_query($mysqlConnection, "SELECT * FROM students");
@@ -13,7 +13,7 @@
 		$GLOBALS["studentList"][] = $row;
 	}
 	// foreach ($GLOBALS["studentList"] as $student)
-	// 	echo $student["name"] . $student["number"] . "<br />";
+	// 	echo "<p>" . $student["name"] . $student["number"] . "</p>";
 	$mysqlResult = mysqli_query($mysqlConnection, "SELECT * FROM homeworks");
 	$GLOBALS["homeworkList"] = array();
 	while ($row = mysqli_fetch_array($mysqlResult))
@@ -21,7 +21,7 @@
 		$GLOBALS["homeworkList"][] = $row;
 	}
 	// foreach ($GLOBALS["homeworkList"] as $homework)
-	// 	echo $homework["title"] . " " . $homework["directory"] . "<br />";
+	// 	echo "<p>" . $homework["title"] . " " . $homework["directory"] . "</p>";
 	mysqli_close($mysqlConnection);
 	function isStudent($name, $number)
 	{
