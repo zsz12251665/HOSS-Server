@@ -9,7 +9,6 @@
 		<title>SCUT 2019计科全英联合班作业提交系统</title>
 	</head>
 	<body>
-		<header></header>
 		<main>
 			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
 <?php
@@ -43,6 +42,5 @@
 	}
 ?>
 		</main>
-		<footer></footer>
 	</body>
 </html>
