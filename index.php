@@ -46,12 +46,18 @@ select{
 	border-radius: 3px;
 	padding-left:5px;
 }
+h1{
+	align="center";
+}
+body{
+	background="img/background.png";
+}
 		</style>
 	</head>
-	<body background="img/background.png">
+	<body >
 		<header></header>
 		<main>
-			<h1 align="center">SCUT 2019计科全英联合班作业提交系统</h1>
+			<h1 >SCUT 2019计科全英联合班作业提交系统</h1>
 			<form action="upload.php" method="post" enctype="multipart/form-data">
 				<section>
 					<label for="StuName">学生姓名：</label>
