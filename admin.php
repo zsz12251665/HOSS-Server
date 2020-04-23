@@ -11,7 +11,7 @@
 	<body>
 		<main>
 			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
-			<a href="edit.php">修改信息</a>
+			<a href="modify.php">修改信息</a>
 			<a href="download.php">下载作业</a>
 		</main>
 	</body>

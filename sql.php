@@ -1,5 +1,4 @@
 <?php
-	require "local.php";
 	$mysqlConnection = connectAndSelect();
 	$GLOBALS["studentList"] = queryToArray($mysqlConnection, "SELECT * FROM students");
 	// foreach ($GLOBALS["studentList"] as $student)
@@ -10,6 +9,7 @@
 	$mysqlConnection->close();
 	function connectAndSelect()
 	{
+		require "local.php";
 		$mysqlConnection = new mysqli($mysql_server, $mysql_username, $mysql_password, "homework");
 		if ($mysqlConnection->connect_error)
 		{
