@@ -2,10 +2,12 @@
 	require "local.php";
 	if ($_POST["Admin"] != $admin_password)
 	{
+		header("HTTP/1.1 403 Forbidden");
 		die("Wrong Password! ");
 	}
 	if (!is_dir($upload_directory . $_POST["WorkTitle"] . "/"))
 	{
+		header("HTTP/1.1 404 Not Found");
 		die("Wrong directory: " . $_POST["WorkTitle"]);
 	}
 	$zipPath = $upload_directory . $_POST["WorkTitle"] . ".zip";
@@ -32,6 +34,7 @@
 	}
 	else
 	{
+		header("HTTP/1.1 501 Not Implemented");
 		die("Fail zip: ZipArchive failure! ");
 	}
 	unlink($zipPath);
