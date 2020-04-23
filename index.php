@@ -11,6 +11,13 @@
 	<body>
 		<main>
 			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
+			<h4>注意事项</h4>
+			<ul>
+				<li>每人每份作业只能提交一个文件；</li>
+				<li>提交新文件会覆盖掉旧文件；</li>
+				<li>如果要提交多个文件，请打包后再提交；</li>
+				<li><del>请不要尝试输入稀奇古怪的东西</del>{{{(>_<)}}}</li>
+			</ul>
 			<form action="/upload.php" method="post" enctype="multipart/form-data">
 				<section>
 					<label for="StuName">学生姓名：</label>
