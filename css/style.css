@@ -1,3 +1,23 @@
+a
+{
+	background-color: white;
+	border: thick solid #595959;
+	color: #595959;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: bold;
+	display: inline-block;
+	margin: 1.5rem;
+	padding: 0.5rem 1rem;
+	text-decoration: none;
+	transition: background-color ease 0.1s, color ease-in-out 0.1s;
+}
+a:focus, a:hover
+{
+	background-color: #595959;
+	color: white;
+	outline: none;
+}
 body
 {
 	align-items: center;
