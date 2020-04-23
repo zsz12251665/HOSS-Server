@@ -38,7 +38,7 @@
 	function deleteFromMysql($table, $title1, $title2, $value1, $value2)
 	{
 		$mysqlConnection = connectAndSelect();
-		$answer = $mysqlConnection->query("DELETE FROM $table WHERE $title1 = \"$value1\" AND $title2 = \"$value2\")");
+		$answer = $mysqlConnection->query("DELETE FROM $table WHERE $title1 = \"$value1\" AND $title2 = \"$value2\"");
 		$mysqlConnection->close();
 		return $answer;
 	}
