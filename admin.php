@@ -11,33 +11,8 @@
 	<body>
 		<main>
 			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
-			<form action="download.php" method="post" enctype="multipart/form-data">
-				<section>
-					<label for="WorkTitle">作业内容：</label>
-					<select name="WorkTitle" id="WorkTitle">
-						<option value="Default" selected="selected">--请选择要下载的作业--</option>
-<?php
-	require "sql.php";
-	foreach (array_reverse($GLOBALS["homeworkList"]) as $homework)
-	{
-		require "local.php";
-		$localDirectory = $upload_directory . ($homework["directory"] ? $homework["directory"] : $homework["title"]) . "/";
-		$count = (file_exists($localDirectory) && is_dir($localDirectory)) ? count(scandir($localDirectory)) - 2 : 0;
-		$directory = htmlspecialchars($homework["directory"] ? $homework["directory"] : $homework["title"]);
-		$title = htmlspecialchars($homework["title"]);
-		echo "<option value=\"" . $directory . "\">" . $title . " (" . $count . ")</option>";
-	}
-?>
-					</select>
-				</section>
-				<section>
-					<label for="Admin">管理员密码：</label>
-					<input type="password" name="Admin" id="Admin" />
-				</section>
-				<section style="text-align: center;">
-					<input type="submit" name="Submit" id="Submit" />
-				</section>
-			</form>
+			<a href="edit.php">修改信息</a>
+			<a href="download.php">下载作业</a>
 		</main>
 	</body>
 </html>
