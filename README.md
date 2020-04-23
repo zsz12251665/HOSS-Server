@@ -8,6 +8,7 @@ This is a homework collecting server built for the 2019 Selected Class of Comput
 
 ```php
 <?php
+	$admin_password = "[admin_password]";
 	$mysql_server = "[mysql_server]";
 	$mysql_username = "[mysql_username]";
 	$mysql_password = "[mysql_password]";
