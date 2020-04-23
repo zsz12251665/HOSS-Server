@@ -20,9 +20,12 @@
 	require "sql.php";
 	foreach (array_reverse($GLOBALS["homeworkList"]) as $homework)
 	{
+		require "local.php";
+		$localDirectory = $upload_directory . ($homework["directory"] ? $homework["directory"] : $homework["title"]) . "/";
+		$count = (file_exists($localDirectory) && is_dir($localDirectory)) ? count(scandir($localDirectory)) - 2 : 0;
 		$directory = htmlspecialchars($homework["directory"] ? $homework["directory"] : $homework["title"]);
 		$title = htmlspecialchars($homework["title"]);
-		echo "<option value=\"" . $directory . "\">" . $title . "</option>";
+		echo "<option value=\"" . $directory . "\">" . $title . " (" . $count . ")</option>";
 	}
 ?>
 					</select>
