@@ -8,15 +8,15 @@
 	{
 		die("Wrong directory: " . $_POST["WorkTitle"]);
 	}
-	$zipName = $_POST["WorkTitle"] . ".zip";
+	$zipPath = $upload_directory . $_POST["WorkTitle"] . ".zip";
 	$zip = new ZipArchive;
-	if ($zip->open($zipName, ZipArchive::CREATE) === TRUE)
+	if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE)
 	{
 		$fileList = scandir($upload_directory . $_POST["WorkTitle"] . "/");
 		foreach ($fileList as $fileName)
 		{
 			$filePath = $upload_directory . $_POST["WorkTitle"] . "/" . $fileName;
-			if (!is_dir($filePath))
+			if ($fileName != "." && fileName!= ".." && !is_dir($filePath))
 			{
 				$zip->addFile($filePath, $fileName);
 			}
@@ -24,15 +24,15 @@
 		$zip->close();
 		header("Cache-Control: no-store");
 		header("Content-Description: File Transfer");
-		header("Content-Disposition: attachment; filename=" . $zipName);
+		header("Content-Disposition: attachment; filename=" . pathinfo($zipPath,PATHINFO_BASENAME));
+		header("Content-Length: " . filesize($zipPath));
 		header("Content-Transfer-Encoding: binary");
 		header("Content-Type: application/zip");
-		header("Content-Length: " . filesize($zipName));
-		readfile($zipName);
+		readfile($zipPath);
 	}
 	else
 	{
 		die("Fail zip: ZipArchive failure! ");
 	}
-	unlink($zipName);
+	unlink($zipPath);
 ?>
