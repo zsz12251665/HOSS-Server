@@ -5,14 +5,13 @@
 		<meta http-equiv="Cache-Control" content="no-cache" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 		<title>SCUT 2019计科全英联合班作业提交系统</title>
 	</head>
 	<body>
 		<main>
 			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
 <?php
-	echo "<p>系统仍在施工中！！！</p>";
 	// echo "<p>StuName: " . $_POST["StuName"] . "</p>";
 	// echo "<p>StuNumber: " . $_POST["StuNumber"] . "</p>";
 	// echo "<p>WorkTitle: " . $_POST["WorkTitle"] . "</p>";
