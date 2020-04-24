@@ -26,7 +26,7 @@
 		$zip->close();
 		header("Cache-Control: no-store");
 		header("Content-Description: File Transfer");
-		header("Content-Disposition: attachment; filename=" . $_POST["WorkTitle"] . ".zip";
+		header("Content-Disposition: attachment; filename=" . $_POST["WorkTitle"] . ".zip");
 		header("Content-Length: " . filesize($zipPath));
 		header("Content-Transfer-Encoding: binary");
 		header("Content-Type: application/zip");
