@@ -5,28 +5,28 @@
 		header("HTTP/1.1 403 Forbidden");
 		die("Wrong Password! ");
 	}
-	if (!is_dir($upload_directory . $_POST["WorkTitle"] . "/"))
+	$workDirectory = $upload_directory . $_POST["WorkTitle"] . "/";
+	if (!is_dir($workDirectory))
 	{
 		header("HTTP/1.1 400 Bad Request");
 		die("Wrong directory: " . $_POST["WorkTitle"]);
 	}
-	$zipPath = $upload_directory . $_POST["WorkTitle"] . ".zip";
+	$zipPath = tempnam(sys_get_temp_dir(), $_POST["WorkTitle"]);
 	$zip = new ZipArchive;
 	if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE)
 	{
-		$fileList = scandir($upload_directory . $_POST["WorkTitle"] . "/");
+		$fileList = scandir($workDirectory);
 		foreach ($fileList as $fileName)
 		{
-			$filePath = $upload_directory . $_POST["WorkTitle"] . "/" . $fileName;
-			if ($fileName != "." && fileName!= ".." && !is_dir($filePath))
+			if ($fileName != "." && fileName!= ".." && !is_dir($workDirectory . $fileName))
 			{
-				$zip->addFile($filePath, $fileName);
+				$zip->addFile($workDirectory . $fileName, $fileName);
 			}
 		}
 		$zip->close();
 		header("Cache-Control: no-store");
 		header("Content-Description: File Transfer");
-		header("Content-Disposition: attachment; filename=" . pathinfo($zipPath,PATHINFO_BASENAME));
+		header("Content-Disposition: attachment; filename=" . $_POST["WorkTitle"] . ".zip";
 		header("Content-Length: " . filesize($zipPath));
 		header("Content-Transfer-Encoding: binary");
 		header("Content-Type: application/zip");
@@ -39,5 +39,4 @@
 	}
 	unlink($zipPath);
 	die();
-	skipProcessing:
 ?>
