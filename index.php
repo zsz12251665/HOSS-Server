@@ -16,7 +16,7 @@
 				<li>每人每份作业只能提交一个文件；</li>
 				<li>提交新文件会覆盖掉旧文件；</li>
 				<li>如果要提交多个文件，请打包后再提交；</li>
-				<li><del>请不要尝试输入稀奇古怪的东西</del>{{{(>_<)}}}</li>
+				<li><del>请不要尝试输入稀奇古怪的东西</del>{{{(&gt;_&lt;)}}}</li>
 			</ul>
 			<form action="/upload.php" method="post" enctype="multipart/form-data">
 				<section>
