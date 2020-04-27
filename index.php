@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="zh">
 	<head>
@@ -18,7 +19,7 @@
 				<li>如果要提交多个文件，请打包后再提交；</li>
 				<li><del>请不要尝试输入稀奇古怪的东西</del>{{{(&gt;_&lt;)}}}</li>
 			</ul>
-			<form action="/upload.php" method="post" enctype="multipart/form-data">
+			<form id="upload-form" action="/upload.php" method="post" enctype="multipart/form-data" target="hidden_iframe">
 				<section>
 					<label for="StuName">学生姓名：</label>
 					<input type="text" name="StuName" id="StuName" />
@@ -43,43 +44,45 @@
 					</select>
 				</section>
 				<section>
-					<?php session_start(); ?>
 					<label for="WorkFile">作业文件：</label>
-					<input type="hidden"
-						name="<?php echo ini_get('session.upload_progress.name'); ?>"
-						value="test" />
-					<input type="file" name="WorkFile" id="WorkFile" target="hidden_iframe"/>
+					<input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
+					<input type="file" name="WorkFile" id="WorkFile"/>
 				</section>
 				<section style="text-align: center;">
 					<input type="submit" name="Submit" id="Submit" />
 				</section>
 			</form>
 			<!-- the progress -->
-			<iframe id="hidden_iframe" name="hidden_iframe" src="about:blank" style="display:none;"></iframe>
+
 			<div id="progress" class="progress" style="margin-bottom:15px;display:none;">
-					<div class="bar" style="width:0%;"></div>
-					<div class="label">0%</div>
+				<div class="bar" style="width:0%;"></div>
+				<div class="label">0%</div>
 			</div>
+
+			<iframe id="hidden_iframe" name="hidden_iframe" src="about:blank" style="display:none;"></iframe>
+
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+			<script type="text/javascript">
+				function fetch_progress(){
+					$.get('progress.php',{ '<?php echo ini_get("session.upload_progress.name"); ?>' : 'test'}, function(data){
+						var progress = parseInt(data);
+
+						$('#progress .label').html(progress + '%');
+						$('#progress .bar').css('width', progress + '%');
+
+						if(progress < 100){
+							setTimeout('fetch_progress()', 1000);
+						}else{
+							$('#progress .label').html('完成!');
+						}
+					}, 'html');
+				}
+
+				$('#upload-form').submit(function(){
+					$('#progress').show();
+					setTimeout('fetch_progress()', 1000);
+				});
+			</script>
 		</main>
 	</body>
 </html>
-<?php
-	function fetch_progress(){
-			$.get('progress.php',{ '' : 'test'}, function(data){
-					var progress = parseInt(data);
-					$('#progress .label').html(progress + '%');
-					$('#progress .bar').css('width', progress + '%');
-
-					if(progress < 100){
-							setTimeout('fetch_progress()', 100);
-					}else{
-				$('#progress .label').html('完成!');
-			}
-			}, 'html');
-	}
-
-	$('#upload-form').submit(function(){
-			$('#progress').show();
-			setTimeout('fetch_progress()', 100);
-	});
-?>
