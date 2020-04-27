@@ -43,13 +43,43 @@
 					</select>
 				</section>
 				<section>
+					<?php session_start(); ?>
 					<label for="WorkFile">作业文件：</label>
-					<input type="file" name="WorkFile" id="WorkFile" />
+					<input type="hidden"
+						name="<?php echo ini_get('session.upload_progress.name'); ?>"
+						value="test" />
+					<input type="file" name="WorkFile" id="WorkFile" target="hidden_iframe"/>
 				</section>
 				<section style="text-align: center;">
 					<input type="submit" name="Submit" id="Submit" />
 				</section>
 			</form>
+			<!-- the progress -->
+			<iframe id="hidden_iframe" name="hidden_iframe" src="about:blank" style="display:none;"></iframe>
+			<div id="progress" class="progress" style="margin-bottom:15px;display:none;">
+					<div class="bar" style="width:0%;"></div>
+					<div class="label">0%</div>
+			</div>
 		</main>
 	</body>
 </html>
+<?php
+	function fetch_progress(){
+			$.get('progress.php',{ '' : 'test'}, function(data){
+					var progress = parseInt(data);
+					$('#progress .label').html(progress + '%');
+					$('#progress .bar').css('width', progress + '%');
+
+					if(progress < 100){
+							setTimeout('fetch_progress()', 100);
+					}else{
+				$('#progress .label').html('完成!');
+			}
+			}, 'html');
+	}
+
+	$('#upload-form').submit(function(){
+			$('#progress').show();
+			setTimeout('fetch_progress()', 100);
+	});
+?>
