@@ -8,10 +8,10 @@
 		header("HTTP/1.1 403 Forbidden");
 		die("Authorization Error: " . $_POST["StuName"] . " (" . $_POST["StuNumber"] . ") is not our student! ");
 	}
-	if($_FILES["WorkFile"]["error"])
+	if(!$_FILES["WorkFile"] || $_FILES["WorkFile"]["error"])
 	{
 		header("HTTP/1.1 400 Bad Request");
-		die("File Error: " . $_FILES["WorkFile"]["error"]);
+		die("File Error: " . ($_FILES["WorkFile"] ? $_FILES["WorkFile"]["error"] : "No such file! "));
 	}
 	else
 	{
