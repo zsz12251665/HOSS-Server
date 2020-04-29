@@ -33,7 +33,7 @@ h1
 }
 input, select
 {
-	border: 1px solid #ccc;
+	border: 1px solid #CCC;
 	border-radius: 3px;
 	padding: 7px 5px;
 }
@@ -44,7 +44,7 @@ input
 }
 input:focus
 {
-	border-color: #66afe9;
+	border-color: #66AFE9;
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 	outline: none;
 }
@@ -52,22 +52,24 @@ section
 {
 	margin: 0.5em;
 }
-.progress{
-	width:100%;
-	border:1px solid #4da8fe;
-	border-radius:40px;
-	height:20px;
-	position:relative;
+#progress
+{
+	border: 1px solid #4D90FE;
+	border-radius: 2em;
+	box-sizing: border-box;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
 }
-.progress .label{
-	position:relative;
-	text-align:center;
+#progress .label
+{
+	text-align: center;
 }
-.progress .bar{
-	position:absolute;
-	left:0;top:0;
-	background:#4D90FE;
-	height:20px;
-	border-radius:40px;
-	min-width:20px;
+#progress .bar
+{
+	background-color: #4D90FE;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
 }

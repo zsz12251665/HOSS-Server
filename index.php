@@ -8,6 +8,7 @@
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
 		<title>SCUT 2019计科全英联合班作业提交系统</title>
+		<script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 	</head>
 	<body>
 		<main>
@@ -20,13 +21,14 @@
 				<li><del>请不要尝试输入稀奇古怪的东西</del>{{{(&gt;_&lt;)}}}</li>
 			</ul>
 			<form id="upload-form" action="/upload.php" method="post" enctype="multipart/form-data" target="hidden_iframe">
+				<input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
 				<section>
 					<label for="StuName">学生姓名：</label>
-					<input type="text" name="StuName" id="StuName" />
+					<input type="text" name="StuName" id="StuName" required="required" />
 				</section>
 				<section>
 					<label for="StuNumber">学生学号：</label>
-					<input type="text" name="StuNumber" id="StuNumber" />
+					<input type="text" name="StuNumber" id="StuNumber" required="required" />
 				</section>
 				<section>
 					<label for="WorkTitle">作业内容：</label>
@@ -45,44 +47,38 @@
 				</section>
 				<section>
 					<label for="WorkFile">作业文件：</label>
-					<input type="hidden" name="<?php echo ini_get("session.upload_progress.name"); ?>" value="test" />
-					<input type="file" name="WorkFile" id="WorkFile"/>
+					<input type="file" name="WorkFile" id="WorkFile" required="required" />
 				</section>
 				<section style="text-align: center;">
 					<input type="submit" name="Submit" id="Submit" />
 				</section>
 			</form>
-			<!-- the progress -->
-
-			<div id="progress" class="progress" style="margin-bottom:15px;display:none;">
-				<div class="bar" style="width:0%;"></div>
+			<div id="progress" style="display: none;">
+				<div class="bar" style="width: 0%;"></div>
 				<div class="label">0%</div>
 			</div>
-
-			<iframe id="hidden_iframe" name="hidden_iframe" src="about:blank" style="display:none;"></iframe>
-
-			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-			<script type="text/javascript">
-				function fetch_progress(){
-					$.get('progress.php',{ '<?php echo ini_get("session.upload_progress.name"); ?>' : 'test'}, function(data){
-						var progress = parseInt(data);
-
-						$('#progress .label').html(progress + '%');
-						$('#progress .bar').css('width', progress + '%');
-
-						if(progress < 100){
-							setTimeout('fetch_progress()', 1000);
-						}else{
-							$('#progress .label').html('完成!');
-						}
-					}, 'html');
-				}
-
-				$('#upload-form').submit(function(){
-					$('#progress').show();
-					setTimeout('fetch_progress()', 1000);
-				});
-			</script>
 		</main>
+		<iframe id="hidden_iframe" name="hidden_iframe" src="about:blank" style="display: none;"></iframe>
+		<script type="text/javascript">
+function fetch_progress()
+{
+	$.get('progress.php', {'<?php echo ini_get("session.upload_progress.name"); ?>' : 'test'}, function(data)
+	{
+		var progress = parseInt(data);
+		$('#progress .label').html(progress < 100 ? progress + '%' : '完成');
+		$('#progress .bar').css('width', progress + '%');
+		if (progress < 100)
+		{
+			setTimeout('fetch_progress()', 1000);
+		}
+	}, 'html');
+}
+
+$('#upload-form').submit(function()
+{
+	$('#progress').show();
+	setTimeout('fetch_progress()', 1000);
+});
+		</script>
 	</body>
 </html>
