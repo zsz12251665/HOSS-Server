@@ -11,11 +11,9 @@ This is a homework collecting server built for the 2019 Selected Class of Comput
 - `upload.php`：上传表单提交、文件收容页面
 - `sql.php`：MySQL数据库对接函数
 - `local.php`：配置服务器参数（需自行创建，详见`配置文件`）
-- `admin.php`：管理员功能导航页面
-- `download.php`：选择要打包下载的作业页面
-- `download_form.php`：提交下载表单、打包下载作业页面
-- `modify.php`：选择要执行的修改操作页面
-- `modify_form.php`：提交修改表单、执行修改操作页面
+- `admin.php`：管理员功能（打包下载作业、执行修改操作）页面
+- `download.php`：提交下载表单、打包下载作业页面
+- `modify.php`：提交修改表单、执行修改操作页面
 - `404.html`：404错误页面
 - `.htaccess`、`.gitignore`：apache与git相关文件
 - `css/`、`img/`：样式表文件夹及图片资源文件夹
