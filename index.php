@@ -48,6 +48,7 @@
 				</section>
 				<section style="text-align: center;">
 					<input type="submit" name="Submit" id="Submit" />
+					<span id="Uploading" style="display: none;">上传中……</span>
 				</section>
 			</form>
 		</main>
@@ -94,8 +95,16 @@ function SubmitForm(e)
 			document.querySelector('input[type=file]').className = 'error';
 		}
 		// console.log(xhr.status);
+		for(let input of document.querySelectorAll('input, select'))
+			input.disabled = false;
+		document.querySelector('input#Submit').style.display = 'inline-block';
+		document.querySelector('span#Uploading').style.display = 'none';
 		alert(xhr.responseText);
 	};
+	for(let input of document.querySelectorAll('input, select'))
+		input.disabled = true;
+	document.querySelector('input#Submit').style.display = 'none';
+	document.querySelector('span#Uploading').style.display = 'inline';
 	xhr.send(form);
 }
 // Add Event Listeners
