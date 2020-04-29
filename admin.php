@@ -11,7 +11,8 @@
 	<body>
 		<main>
 			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
-			<form action="/download.php" method="post" enctype="multipart/form-data">
+			<h4>下载作业</h4>
+			<form action="download.php" method="post" enctype="multipart/form-data">
 				<section>
 					<label for="WorkTitle">作业内容：</label>
 					<select name="WorkTitle" id="WorkTitle">
@@ -38,7 +39,8 @@
 					<input type="submit" />
 				</section>
 			</form>
-			<form action="/modify.php" method="post" enctype="multipart/form-data">
+			<h4>修改信息</h4>
+			<form action="modify.php" method="post" enctype="multipart/form-data">
 				<section style="text-align: center;">
 					<input type="radio" name="Mode" id="NewWork" value="NewWork" />
 					<label for="NewWork">新建作业</label>
