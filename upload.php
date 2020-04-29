@@ -1,33 +1,22 @@
-<!DOCTYPE html>
-<html lang="zh">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-		<meta http-equiv="Cache-Control" content="no-cache" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css" />
-		<title>SCUT 2019计科全英联合班作业提交系统</title>
-	</head>
-	<body>
-		<main>
-			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
 <?php
-	// echo "<p>StuName: " . $_POST["StuName"] . "</p>";
-	// echo "<p>StuNumber: " . $_POST["StuNumber"] . "</p>";
-	// echo "<p>WorkTitle: " . $_POST["WorkTitle"] . "</p>";
+	// echo "StuName: " . $_POST["StuName"];
+	// echo "StuNumber: " . $_POST["StuNumber"];
+	// echo "WorkTitle: " . $_POST["WorkTitle"];
 	require "sql.php";
 	if (!isStudent($_POST["StuName"], $_POST["StuNumber"]))
 	{
-		die("<p>" . $_POST["StuName"] . " (" . $_POST["StuNumber"] . ") is not our student! </p>");
+		header("HTTP/1.1 403 Forbidden");
+		die("Authorization Error: " . $_POST["StuName"] . " (" . $_POST["StuNumber"] . ") is not our student! ");
 	}
 	if($_FILES["WorkFile"]["error"])
 	{
-		die("<p>Error: " . $_FILES["WorkFile"]["error"] . "</p>");
+		header("HTTP/1.1 400 Bad Request");
+		die("File Error: " . $_FILES["WorkFile"]["error"]);
 	}
 	else
 	{
-		// echo "<p>Upload: " . $_FILES["WorkFile"]["name"] . "</p>";
-		// echo "<p>Size: " . $_FILES["WorkFile"]["size"] . " Byte(s)</p>";
+		// echo "Upload: " . $_FILES["WorkFile"]["name"];
+		// echo "Size: " . $_FILES["WorkFile"]["size"] . " Byte(s)";
 		require "local.php";
 		if (!file_exists($upload_directory . $_POST["WorkTitle"] . "/"))
 		{
@@ -44,10 +33,8 @@
 		$savingLocation = $upload_directory . $_POST["WorkTitle"] . "/" . $_POST["StuNumber"] . "-" . $_POST["StuName"] . "." . strtolower(pathinfo($_FILES["WorkFile"]["name"], PATHINFO_EXTENSION));
 		if(move_uploaded_file($_FILES["WorkFile"]["tmp_name"], $savingLocation))
 		{
-			echo "<p>Upload successfully! </p>";
+			header("HTTP/1.1 200 OK");
+			echo "Upload successfully! ";
 		}
 	}
 ?>
-		</main>
-	</body>
-</html>

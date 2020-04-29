@@ -18,7 +18,7 @@
 				<li>如果要提交多个文件，请打包后再提交；</li>
 				<li><del>请不要尝试输入稀奇古怪的东西</del>{{{(&gt;_&lt;)}}}</li>
 			</ul>
-			<form action="/upload.php" method="post" enctype="multipart/form-data">
+			<form action="javascript:void(0)" method="post" enctype="multipart/form-data">
 				<section>
 					<label for="StuName">学生姓名：</label>
 					<input type="text" name="StuName" id="StuName" />
@@ -51,5 +51,56 @@
 				</section>
 			</form>
 		</main>
+		<script type="text/javascript">
+function SubmitForm(e)
+{
+	e.preventDefault();
+	// Validate and collect the form data
+	let form = new FormData();
+	for (let input of document.querySelectorAll('input[type="text"]'))
+	{
+		if (!input.value)
+			input.className = 'error';
+		else
+			form.append(input.name, input.value);
+	}
+	if (!document.querySelector('input[type=file]').files)
+		document.querySelector('input[type=file]').className = 'error';
+	else
+		form.append(document.querySelector('input[type=file]').name, document.querySelector('input[type=file]').files[0])
+	if (document.querySelector('select').selectedIndex == 0)
+		document.querySelector('select').className = 'error';
+	else
+		form.append(document.querySelector('select').name, document.querySelector('select').selectedOptions[0].value);
+	if (document.querySelector('input.error, select.error'))
+	{
+		alert('请完整填写表单！');
+		return;
+	}
+	// Submit the form via AJAX
+	let xhr = new XMLHttpRequest();
+	xhr.open('POST', 'upload.php', true);
+	xhr.onreadystatechange = function ()
+	{
+		if (xhr.readyState != 4)
+			return;
+		if (xhr.status == 403)
+		{
+			for (let input of document.querySelectorAll('input[type="text"]'))
+				input.className = 'error';
+		}
+		if (xhr.status == 400)
+		{
+			document.querySelector('input[type=file]').className = 'error';
+		}
+		alert(xhr.responseText);
+	};
+	xhr.send(form);
+}
+// Add Event Listeners
+document.querySelector('form').addEventListener('submit', SubmitForm);
+for (let input of document.querySelectorAll('input, select'))
+	input.addEventListener('focus', function () { input.className = ''; });
+		</script>
 	</body>
 </html>
