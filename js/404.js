@@ -82,6 +82,6 @@ var CSSStyles = [
 ];
 for (let i = 0; i < 40; ++i)
 {
-	document.querySelector('main').innerHTML += '<span style="' + CSSStyles[i] + '">4</span>';
-	document.querySelector('main').innerHTML += '<span style="' + CSSStyles[40 + i] + '">0</span>';
+	document.querySelector('body').innerHTML += '<span style="' + CSSStyles[i] + '">4</span>';
+	document.querySelector('body').innerHTML += '<span style="' + CSSStyles[40 + i] + '">0</span>';
 }
