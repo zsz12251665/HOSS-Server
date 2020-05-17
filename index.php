@@ -48,7 +48,10 @@
 				</section>
 				<section style="text-align: center;">
 					<input type="submit" name="Submit" id="Submit" />
-					<span id="Uploading" style="display: none;">上传中……</span>
+					<div id="Progress" class="progress" style="display: none;">
+						<span class="label" style="width: 0%;"></span>
+						<div class="strip">0%</div>
+					</div>
 				</section>
 			</form>
 		</main>

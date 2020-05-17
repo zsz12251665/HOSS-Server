@@ -26,6 +26,19 @@ function SubmitForm(e)
 	// Submit the form via AJAX
 	let xhr = new XMLHttpRequest();
 	xhr.open('POST', 'upload.php', true);
+	// Set the event when uploading
+	xhr.onprogress = function (e)
+	{
+		if (e.lengthComputable)
+		{
+			let progress = 100 * e.loaded / e.total;
+			// console.log(progress);
+			// Update the progress bar
+			document.querySelector('div#Progress div.strip').innerText = Math.floor(progress) + '%';
+			document.querySelector('div#Progress div.strip').style.width = Math.floor(progress) + '%';
+		}
+	};
+	// Set the event when the upload completed
 	xhr.onreadystatechange = function ()
 	{
 		if (xhr.readyState != 4)
@@ -40,16 +53,18 @@ function SubmitForm(e)
 			document.querySelector('input[type=file]').className = 'error';
 		}
 		// console.log(xhr.status);
-		for(let input of document.querySelectorAll('input, select'))
+		for (let input of document.querySelectorAll('input, select'))
 			input.disabled = false;
 		document.querySelector('input#Submit').style.display = 'inline-block';
-		document.querySelector('span#Uploading').style.display = 'none';
+		document.querySelector('div#Progress').style.display = 'none';
 		alert(xhr.responseText);
 	};
-	for(let input of document.querySelectorAll('input, select'))
+	for (let input of document.querySelectorAll('input, select'))
 		input.disabled = true;
 	document.querySelector('input#Submit').style.display = 'none';
-	document.querySelector('span#Uploading').style.display = 'inline';
+	document.querySelector('div#Progress').style.display = 'block';
+	document.querySelector('div#Progress div.strip').innerText = '0%';
+	document.querySelector('div#Progress div.strip').style.width = '0%';
 	xhr.send(form);
 }
 // Add Event Listeners
