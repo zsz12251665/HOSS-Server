@@ -49,8 +49,8 @@
 				<section style="text-align: center;">
 					<input type="submit" name="Submit" id="Submit" />
 					<div id="Progress" class="progress" style="display: none;">
-						<span class="label" style="width: 0%;"></span>
-						<div class="strip">0%</div>
+						<span class="label">0%</span>
+						<div class="strip" style="width: 0%;"></div>
 					</div>
 				</section>
 			</form>
