@@ -42,7 +42,7 @@
 		$mysqlConnection->close();
 		return $answer;
 	}
-	function isHomework($title, $directory)
+	function isHomework($title)
 	{
 		foreach ($GLOBALS["homeworkList"] as $homework)
 		{
