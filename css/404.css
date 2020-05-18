@@ -1,3 +1,4 @@
+@import url("/css/style.css");
 @keyframes apparition
 {
 	from
@@ -55,31 +56,13 @@
 		transform: translateY(-28px);
 	}
 }
-*
+body
 {
-	box-sizing: border-box;
+	background-image: none;
+	font-family: sans-serif;
+	overflow: hidden;
 }
-a
-{
-	background-color: white;
-	border: thick solid #595959;
-	color: #595959;
-	cursor: pointer;
-	font-size: 1rem;
-	font-weight: bold;
-	display: inline-block;
-	margin: 1.5rem;
-	padding: 0.5rem 1rem;
-	text-decoration: none;
-	transition: background-color ease 0.1s, color ease-in-out 0.1s;
-}
-a:focus, a:hover
-{
-	background-color: #595959;
-	color: white;
-	outline: none;
-}
-article
+main
 {
 	animation: apparition 0.8s 0.5s cubic-bezier(0.39, 0.575, 0.28, 0.995) forwards;
 	background-color: white;
@@ -93,33 +76,15 @@ article
 	width: 600px;
 	z-index: 1;
 }
-body
-{
-	font-size: 20px;
-	margin: 0;
-}
-main
-{
-	align-items: center;
-	background-color: white;
-	color: black;
-	display: flex;
-	font-family: sans-serif;
-	height: 100vh;
-	justify-content: center;
-	overflow: hidden;
-	position: relative;
-}
 p
 {
-	color: #595959;
+	color: dimgrey;
 	font-size: 1.3rem;
 	letter-spacing: 0.1rem;
 	margin: 0;
 }
 span
 {
-	display: block;
 	pointer-events: none;
 	position: absolute;
 }

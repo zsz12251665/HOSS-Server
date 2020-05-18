@@ -1,52 +1,70 @@
-<!DOCTYPE html>
-<html lang="zh">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-		<meta http-equiv="Cache-Control" content="no-cache" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="stylesheet" type="text/css" href="/css/style.css" />
-		<title>SCUT 2019计科全英联合班作业提交系统</title>
-	</head>
-	<body>
-		<main>
-			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
-			<form action="/modify_form.php" method="post" enctype="multipart/form-data">
-				<section style="text-align: center;">
-					<input type="radio" name="Mode" id="NewWork" value="NewWork" />
-					<label for="NewWork">新建作业</label>
-					<input type="radio" name="Mode" id="DelWork" value="DelWork" />
-					<label for="DelWork">删除作业</label>
-					<br />
-					<input type="radio" name="Mode" id="NewStu" value="NewStu" />
-					<label for="NewStu">新建学生</label>
-					<input type="radio" name="Mode" id="DelStu" value="DelStu" />
-					<label for="DelStu">删除学生</label>
-				</section>
-				<section>
-					<label for="WorkTitle">作业内容：</label>
-					<input type="text" name="WorkTitle" id="WorkTitle" />
-				</section>
-				<section>
-					<label for="WorkDirectory">作业目录：</label>
-					<input type="text" name="WorkDirectory" id="WorkDirectory" />
-				</section>
-				<section>
-					<label for="StuName">学生姓名：</label>
-					<input type="text" name="StuName" id="StuName" />
-				</section>
-				<section>
-					<label for="StuNumber">学生学号：</label>
-					<input type="text" name="StuNumber" id="StuNumber" />
-				</section>
-				<section>
-					<label for="Admin">管理员密码：</label>
-					<input type="password" name="Admin" id="Admin" />
-				</section>
-				<section style="text-align: center;">
-					<input type="submit" name="Submit" id="Submit" />
-				</section>
-			</form>
-		</main>
-	</body>
-</html>
+<?php
+	require "local.php";
+	if ($_POST["ModifyAdmin"] != $admin_password)
+	{
+		header("HTTP/1.1 403 Forbidden");
+		die("Wrong Password! ");
+	}
+	require "sql.php";
+	switch ($_POST["Mode"]) {
+		case "NewWork":
+			if (isHomework($_POST["First"], $_POST["Second"]))
+			{
+				header("HTTP/1.1 400 Bad Request");
+				die("Homework exists: " . $_POST["First"] . " (" . $_POST["Second"] . ")");
+			}
+			if (!$_POST["First"])
+			{
+				header("HTTP/1.1 400 Bad Request");
+				die("Empty homework title! ");
+			}
+			$status = insertIntoMysql("homeworks", "title", "directory", $_POST["First"], $_POST["Second"]);
+			$errorMessage = "Failed to insert (" . $_POST["First"] . ", " . $_POST["Second"] . ") into homeworks";
+			break;
+		case "DelWork":
+			if (!isHomework($_POST["First"], $_POST["Second"]))
+			{
+				header("HTTP/1.1 400 Bad Request");
+				die("Homework doesn't exist: " . $_POST["First"] . " (" . $_POST["Second"] . ")");
+			}
+			$status = deleteFromMysql("homeworks", "title", "directory", $_POST["First"], $_POST["Second"]);
+			$errorMessage = "Failed to delete (" . $_POST["First"] . ", " . $_POST["Second"] . ") from homeworks";
+			break;
+		case "NewStu":
+			if (isStudent($_POST["First"], $_POST["Second"]))
+			{
+				header("HTTP/1.1 400 Bad Request");
+				die("Student exists: " . $_POST["First"] . " (" . $_POST["Second"] . ")");
+			}
+			if (!$_POST["First"] || !$_POST["Second"])
+			{
+				header("HTTP/1.1 400 Bad Request");
+				die("Lack of student name or student number! ");
+			}
+			$status = insertIntoMysql("students", "name", "number", $_POST["First"], $_POST["Second"]);
+			$errorMessage = "Failed to insert (" . $_POST["First"] . ", " . $_POST["Second"] . ") into students";
+			break;
+		case "DelStu":
+			if (!isStudent($_POST["First"], $_POST["Second"]))
+			{
+				header("HTTP/1.1 400 Bad Request");
+				die("Student doesn't exist: " . $_POST["First"] . " (" . $_POST["Second"] . ")");
+			}
+			$status = deleteFromMysql("students", "name", "number", $_POST["First"], $_POST["Second"]);
+			$errorMessage = "Failed to remove (" . $_POST["First"] . ", " . $_POST["Second"] . ") from students";
+			break;
+		default:
+			header("HTTP/1.1 400 Bad Request");
+			die("Unable to understand mode: " . $_POST["Mode"]);
+	}
+	if ($status === TRUE)
+	{
+		header("HTTP/1.1 200 OK");
+		die("Modify Successful! ");
+	}
+	else
+	{
+		header("HTTP/1.1 500 Internal Server Error");
+		die($errorMessage);
+	}
+?>

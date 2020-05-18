@@ -18,7 +18,7 @@
 				<li>如果要提交多个文件，请打包后再提交；</li>
 				<li><del>请不要尝试输入稀奇古怪的东西</del>{{{(&gt;_&lt;)}}}</li>
 			</ul>
-			<form action="/upload.php" method="post" enctype="multipart/form-data">
+			<form action="javascript:void(0)" method="post" enctype="multipart/form-data">
 				<section>
 					<label for="StuName">学生姓名：</label>
 					<input type="text" name="StuName" id="StuName" />
@@ -48,8 +48,13 @@
 				</section>
 				<section style="text-align: center;">
 					<input type="submit" name="Submit" id="Submit" />
+					<div id="Progress" class="progress" style="display: none;">
+						<span class="label">0%</span>
+						<div class="strip" style="width: 0%;"></div>
+					</div>
 				</section>
 			</form>
 		</main>
+		<script type="text/javascript" src="/js/upload.js"></script>
 	</body>
 </html>
