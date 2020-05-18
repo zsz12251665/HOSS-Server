@@ -46,19 +46,10 @@
 					<label for="NewWork">新建作业</label>
 					<input type="radio" name="Mode" id="DelWork" value="DelWork" />
 					<label for="DelWork">删除作业</label>
-					<br />
-					<input type="radio" name="Mode" id="NewStu" value="NewStu" />
-					<label for="NewStu">新建学生</label>
-					<input type="radio" name="Mode" id="DelStu" value="DelStu" />
-					<label for="DelStu">删除学生</label>
 				</section>
 				<section>
-					<label for="First">作业内容/学生姓名：</label>
+					<label for="First">作业内容：</label>
 					<input type="text" name="First" id="First" />
-				</section>
-				<section>
-					<label for="Second">作业目录/学生学号：</label>
-					<input type="text" name="Second" id="Second" />
 				</section>
 				<section>
 					<label for="ModifyAdmin">管理员密码：</label>

@@ -46,7 +46,7 @@
 	{
 		foreach ($GLOBALS["homeworkList"] as $homework)
 		{
-			if (($homework["title"] == $title) && ($homework["directory"] == $directory))
+			if (($homework["title"] == $title))
 				return true;
 		}
 		return false;
