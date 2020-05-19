@@ -1,24 +1,54 @@
 <?php
-	$mysqlConnection = connectAndSelect();
-	$GLOBALS["studentList"] = queryToArray($mysqlConnection, "SELECT * FROM students");
-	// foreach ($GLOBALS["studentList"] as $student)
-	// 	echo "<p>" . $student["name"] . $student["number"] . "</p>";
-	$GLOBALS["homeworkList"] = queryToArray($mysqlConnection, "SELECT * FROM homeworks");
-	// foreach ($GLOBALS["homeworkList"] as $homework)
-	// 	echo "<p>" . $homework["title"] . " " . $homework["directory"] . "</p>";
-	$mysqlConnection->close();
 	function connectAndSelect()
 	{
 		require "local.php";
 		$mysqlConnection = new mysqli($mysql_server, $mysql_username, $mysql_password, "homework");
 		if ($mysqlConnection->connect_error)
 		{
-			die("<p>Could not connect! " . $mysqlConnection->connect_error . "</p>");
+			header("HTTP/1.1 500 Internal Server Error");
+			die("Could not connect! " . $mysqlConnection->connect_error);
 		}
 		return $mysqlConnection;
 	}
-	function queryToArray($mysqlConnection, $queryString)
+	function insertIntoMysql($table, $entry = array())
 	{
+		$mysqlConnection = connectAndSelect();
+		$keys = array();
+		$values = array();
+		if (!$entry)
+		{
+			return false;
+		}
+		foreach ($entry as $key => $value)
+		{
+			$keys[] = $key;
+			$values[] = $value;
+		}
+		$queryString = "INSERT INTO " . $table . " (" . implode(", ", $keys) . ") VALUES (\"" . implode("\", \"", $values) . "\")";
+		$answer = $mysqlConnection->query($queryString);
+		$mysqlConnection->close();
+		return $answer;
+	}
+	function deleteFromMysql($table, $entry = array())
+	{
+		$mysqlConnection = connectAndSelect();
+		$queryString = "DELETE FROM " . $table . " WHERE TRUE";
+		foreach ($entry as $key => $value)
+		{
+			$queryString = $queryString . " AND " . $key . " = " . $value;
+		}
+		$answer = $mysqlConnection->query($queryString);
+		$mysqlConnection->close();
+		return $answer;
+	}
+	function matchingEntry($table, $entry = array())
+	{
+		$mysqlConnection = connectAndSelect();
+		$queryString = "SELECT * FROM " . $table . " WHERE TRUE";
+		foreach ($entry as $key => $value)
+		{
+			$queryString = $queryString . " AND " . $key . " = " . $value;
+		}
 		$mysqlResult = $mysqlConnection->query($queryString);
 		$answer = array();
 		while ($row = $mysqlResult->fetch_array())
@@ -26,40 +56,7 @@
 			$answer[] = $row;
 		}
 		$mysqlResult->free();
-		return $answer;
-	}
-	function insertIntoMysql($table, $title1, $title2, $value1, $value2)
-	{
-		$mysqlConnection = connectAndSelect();
-		$answer = $mysqlConnection->query("INSERT INTO $table ($title1, $title2) VALUES (\"$value1\",\"$value2\")");
 		$mysqlConnection->close();
 		return $answer;
-	}
-	function deleteFromMysql($table, $title1, $title2, $value1, $value2)
-	{
-		$mysqlConnection = connectAndSelect();
-		$answer = $mysqlConnection->query("DELETE FROM $table WHERE $title1 = \"$value1\" AND $title2 = \"$value2\"");
-		$mysqlConnection->close();
-		return $answer;
-	}
-	function isHomework($title, $directory)
-	{
-		foreach ($GLOBALS["homeworkList"] as $homework)
-		{
-			if (($homework["title"] == $title) && ($homework["directory"] == $directory))
-				return true;
-		}
-		return false;
-	}
-	function isStudent($name, $number)
-	{
-		foreach ($GLOBALS["studentList"] as $student)
-		{
-			if (($student["name"] == $name) && ($student["number"] == $number))
-			{
-				return true;
-			}
-		}
-		return false;
 	}
 ?>

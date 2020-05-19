@@ -6,52 +6,53 @@
 		die("Wrong Password! ");
 	}
 	require "sql.php";
-	switch ($_POST["Mode"]) {
-		case "NewWork":
-			if (isHomework($_POST["First"], $_POST["Second"]))
-			{
-				header("HTTP/1.1 400 Bad Request");
-				die("Homework exists: " . $_POST["First"] . " (" . $_POST["Second"] . ")");
-			}
+	$entry = array();
+	switch ($_POST["Target"])
+	{
+		case 'homeworks':
 			if (!$_POST["First"])
 			{
 				header("HTTP/1.1 400 Bad Request");
 				die("Empty homework title! ");
 			}
-			$status = insertIntoMysql("homeworks", "title", "directory", $_POST["First"], $_POST["Second"]);
-			$errorMessage = "Failed to insert (" . $_POST["First"] . ", " . $_POST["Second"] . ") into homeworks";
+			$entry = array("title" => $_POST["First"], "directory" => $_POST["Second"]);
 			break;
-		case "DelWork":
-			if (!isHomework($_POST["First"], $_POST["Second"]))
+		case 'students':
+			if (!$_POST["First"])
 			{
 				header("HTTP/1.1 400 Bad Request");
-				die("Homework doesn't exist: " . $_POST["First"] . " (" . $_POST["Second"] . ")");
+				die("Empty student name! ");
 			}
-			$status = deleteFromMysql("homeworks", "title", "directory", $_POST["First"], $_POST["Second"]);
-			$errorMessage = "Failed to delete (" . $_POST["First"] . ", " . $_POST["Second"] . ") from homeworks";
+			if (!$_POST["Second"])
+			{
+				header("HTTP/1.1 400 Bad Request");
+				die("Empty student number! ");
+			}
+			$entry = array("name" => $_POST["First"], "number" => $_POST["Second"]);
 			break;
-		case "NewStu":
-			if (isStudent($_POST["First"], $_POST["Second"]))
+		default:
+			header("HTTP/1.1 400 Bad Request");
+			die("Unable to understand target: " . $_POST["Target"]);
+	}
+	switch ($_POST["Mode"])
+	{
+		case "Insert":
+			if (matchingEntry($_POST["Target"], $entry))
 			{
 				header("HTTP/1.1 400 Bad Request");
-				die("Student exists: " . $_POST["First"] . " (" . $_POST["Second"] . ")");
+				die("Entry exists: (" . $_POST["First"] . ", " . $_POST["Second"] . ") in " . $_POST["Target"]);
 			}
-			if (!$_POST["First"] || !$_POST["Second"])
-			{
-				header("HTTP/1.1 400 Bad Request");
-				die("Lack of student name or student number! ");
-			}
-			$status = insertIntoMysql("students", "name", "number", $_POST["First"], $_POST["Second"]);
-			$errorMessage = "Failed to insert (" . $_POST["First"] . ", " . $_POST["Second"] . ") into students";
+			$status = insertIntoMysql($_POST["Target"], $entry);
+			$errorMessage = "Failed to insert (" . $_POST["First"] . ", " . $_POST["Second"] . ") into " . $_POST["Target"];
 			break;
-		case "DelStu":
-			if (!isStudent($_POST["First"], $_POST["Second"]))
+		case "Delete":
+			if (!matchingEntry($_POST["Target"], $entry))
 			{
 				header("HTTP/1.1 400 Bad Request");
-				die("Student doesn't exist: " . $_POST["First"] . " (" . $_POST["Second"] . ")");
+				die("Entry doesn't exist: (" . $_POST["First"] . ", " . $_POST["Second"] . ") in " . $_POST["Target"]);
 			}
-			$status = deleteFromMysql("students", "name", "number", $_POST["First"], $_POST["Second"]);
-			$errorMessage = "Failed to remove (" . $_POST["First"] . ", " . $_POST["Second"] . ") from students";
+			$status = deleteFromMysql($_POST["Target"], $entry);
+			$errorMessage = "Failed to delete (" . $_POST["First"] . ", " . $_POST["Second"] . ") from " . $_POST["Target"];
 			break;
 		default:
 			header("HTTP/1.1 400 Bad Request");

@@ -19,7 +19,7 @@
 						<option value="Default" selected="selected">--请选择要下载的作业--</option>
 <?php
 	require "sql.php";
-	foreach (array_reverse($GLOBALS["homeworkList"]) as $homework)
+	foreach (array_reverse(matchingEntry("homeworks")) as $homework)
 	{
 		require "local.php";
 		$localDirectory = $upload_directory . ($homework["directory"] ? $homework["directory"] : $homework["title"]) . "/";
@@ -42,15 +42,15 @@
 			<h4>修改信息</h4>
 			<form action="modify.php" method="post" enctype="multipart/form-data">
 				<section style="text-align: center;">
-					<input type="radio" name="Mode" id="NewWork" value="NewWork" />
-					<label for="NewWork">新建作业</label>
-					<input type="radio" name="Mode" id="DelWork" value="DelWork" />
-					<label for="DelWork">删除作业</label>
+					<input type="radio" name="Mode" id="Insert" value="Insert" />
+					<label for="insert">新建</label>
+					<input type="radio" name="Mode" id="Delete" value="Delete" />
+					<label for="Dele">删除</label>
 					<br />
-					<input type="radio" name="Mode" id="NewStu" value="NewStu" />
-					<label for="NewStu">新建学生</label>
-					<input type="radio" name="Mode" id="DelStu" value="DelStu" />
-					<label for="DelStu">删除学生</label>
+					<input type="radio" name="Target" id="Students" value="students" />
+					<label for="Students">学生</label>
+					<input type="radio" name="Target" id="Homeworks" value="homeworks" />
+					<label for="Homeworks">作业</label>
 				</section>
 				<section>
 					<label for="First">作业内容/学生姓名：</label>

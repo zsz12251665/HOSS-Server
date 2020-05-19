@@ -33,7 +33,7 @@
 						<option value="Default" selected="selected">--请选择要提交的作业--</option>
 <?php
 	require "sql.php";
-	foreach (array_reverse($GLOBALS["homeworkList"]) as $homework)
+	foreach (array_reverse(matchingEntry("homeworks")) as $homework)
 	{
 		$directory = htmlspecialchars($homework["directory"] ? $homework["directory"] : $homework["title"]);
 		$title = htmlspecialchars($homework["title"]);
