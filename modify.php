@@ -1,71 +1,70 @@
 <?php
+	$password = htmlspecialchars($_POST["Password"], ENT_QUOTES);
+	$target = htmlspecialchars($_POST["Target"], ENT_QUOTES);
+	$mode = htmlspecialchars($_POST["Mode"], ENT_QUOTES);
+	$firstColumn = htmlspecialchars($_POST["First"], ENT_QUOTES);
+	$secondColumn = htmlspecialchars($_POST["Second"], ENT_QUOTES);
 	require "local.php";
-	if ($_POST["ModifyAdmin"] != $admin_password)
+	if ($password != $admin_password)
 	{
 		header("HTTP/1.1 403 Forbidden");
 		die("Wrong Password! ");
 	}
 	require "sql.php";
 	$entry = array();
-	switch ($_POST["Target"])
+	switch ($target)
 	{
 		case 'homeworks':
-			if (!$_POST["First"])
+			if (!$firstColumn)
 			{
 				header("HTTP/1.1 400 Bad Request");
 				die("Empty homework title! ");
 			}
-			$entry = array("title" => $_POST["First"], "directory" => $_POST["Second"]);
+			if (!$secondColumn)
+			{
+				$secondColumn = $firstColumn;
+			}
+			if (preg_match("/[\\\/:*?\"<>|]/", $secondColumn))
+			{
+				header("HTTP/1.1 400 Bad Request");
+				die("invalid directory name: " . $secondColumn);
+			}
+			$entry = $secondColumn ? array("title" => $firstColumn, "directory" => $secondColumn) : array("title" => $firstColumn);
 			break;
 		case 'students':
-			if (!$_POST["First"])
+			if (!$firstColumn || !$secondColumn)
 			{
 				header("HTTP/1.1 400 Bad Request");
-				die("Empty student name! ");
+				die("Empty student name or number! ");
 			}
-			if (!$_POST["Second"])
-			{
-				header("HTTP/1.1 400 Bad Request");
-				die("Empty student number! ");
-			}
-			$entry = array("name" => $_POST["First"], "number" => $_POST["Second"]);
+			$entry = array("name" => $firstColumn, "number" => $secondColumn);
 			break;
 		default:
 			header("HTTP/1.1 400 Bad Request");
-			die("Unable to understand target: " . $_POST["Target"]);
+			die("Unable to understand target: " . $target);
 	}
-	switch ($_POST["Mode"])
+	switch ($mode)
 	{
 		case "Insert":
-			if (matchingEntry($_POST["Target"], $entry))
+			if (selectInMysql($target, $entry))
 			{
 				header("HTTP/1.1 400 Bad Request");
-				die("Entry exists: (" . $_POST["First"] . ", " . $_POST["Second"] . ") in " . $_POST["Target"]);
+				die("Entry exists: (" . $firstColumn . ", " . $secondColumn . ") in " . $target);
 			}
-			$status = insertIntoMysql($_POST["Target"], $entry);
-			$errorMessage = "Failed to insert (" . $_POST["First"] . ", " . $_POST["Second"] . ") into " . $_POST["Target"];
+			insertIntoMysql($target, $entry);
 			break;
 		case "Delete":
-			if (!matchingEntry($_POST["Target"], $entry))
+			if (!selectInMysql($target, $entry))
 			{
 				header("HTTP/1.1 400 Bad Request");
-				die("Entry doesn't exist: (" . $_POST["First"] . ", " . $_POST["Second"] . ") in " . $_POST["Target"]);
+				die("Entry doesn't exist: (" . $firstColumn . ", " . $secondColumn . ") in " . $target);
 			}
-			$status = deleteFromMysql($_POST["Target"], $entry);
-			$errorMessage = "Failed to delete (" . $_POST["First"] . ", " . $_POST["Second"] . ") from " . $_POST["Target"];
+			deleteFromMysql($target, $entry);
 			break;
 		default:
 			header("HTTP/1.1 400 Bad Request");
-			die("Unable to understand mode: " . $_POST["Mode"]);
+			die("Unable to understand mode: " . $mode);
 	}
-	if ($status === TRUE)
-	{
-		header("HTTP/1.1 200 OK");
-		die("Modify Successful! ");
-	}
-	else
-	{
-		header("HTTP/1.1 500 Internal Server Error");
-		die($errorMessage);
-	}
+	header("HTTP/1.1 200 OK");
+	die("Modify Successful! ");
 ?>
