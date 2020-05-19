@@ -11,6 +11,7 @@ function SubmitForm(e)
 		}
 		else
 		{
+			input.className = '';
 			form.append(input.name, input.value);
 		}
 	}
@@ -78,6 +79,7 @@ function SubmitForm(e)
 		document.querySelector('div#Progress').style.display = 'none';
 		// Show the result
 		alert(xhr.responseText);
+		location.reload();
 	};
 	// Disable the inputs and show the progress bar
 	for (let input of document.querySelectorAll('input, select'))

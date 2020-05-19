@@ -10,8 +10,20 @@ function displayMode(e)
 {
 	displaySection('', 'none');
 	displaySection(e.target.value.toLowerCase(), 'block');
-	for(let input of document.querySelectorAll('section.insert input'))
+	for (let input of document.querySelectorAll('section.insert input'))
+	{
 		input.disabled = (e.target.value == 'Download');
+	}
+	if (e.target.value == 'Delete')
+	{
+		for (let input of document.querySelectorAll('input[name="Target"]'))
+		{
+			if (input.checked)
+			{
+				input.click();
+			}
+		}
+	}
 }
 function displayTarget(e)
 {
@@ -72,6 +84,7 @@ function SubmitForm(e)
 		// console.log(xhr.status + ': ' xhr.responseText);
 		// Show the result
 		alert(xhr.responseText);
+		location.reload();
 	};
 	// Send the request
 	xhr.send(form);

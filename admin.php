@@ -20,7 +20,7 @@
 					<input type="radio" name="Mode" id="Download" value="Download" />
 					<label for="Download">下载</label>
 				</section>
-				<section class="insert delete" style="text-align: center;">
+				<section class="insert delete homeworks students" style="text-align: center;">
 					<input type="radio" name="Target" id="Students" value="students" />
 					<label for="Students">学生</label>
 					<input type="radio" name="Target" id="Homeworks" value="homeworks" checked="checked" />

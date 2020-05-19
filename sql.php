@@ -40,7 +40,7 @@
 		$queryString = "DELETE FROM " . $table . " WHERE TRUE";
 		foreach ($entry as $key => $value)
 		{
-			$queryString = $queryString . " AND " . $key . " = " . $value;
+			$queryString = $queryString . " AND " . $key . " = \"" . $value . "\"";
 		}
 		$answer = $mysqlConnection->query($queryString);
 		if ($mysqlConnection->error)
@@ -57,7 +57,7 @@
 		$queryString = "SELECT * FROM " . $table . " WHERE TRUE";
 		foreach ($entry as $key => $value)
 		{
-			$queryString = $queryString . " AND " . $key . " = " . $value;
+			$queryString = $queryString . " AND " . $key . " = \"" . $value . "\"";
 		}
 		$mysqlResult = $mysqlConnection->query($queryString);
 		if ($mysqlConnection->error)
