@@ -79,7 +79,6 @@ function SubmitForm(e)
 		document.querySelector('div#Progress').style.display = 'none';
 		// Show the result
 		alert(xhr.responseText);
-		location.reload();
 	};
 	// Disable the inputs and show the progress bar
 	for (let input of document.querySelectorAll('input, select'))
