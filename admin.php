@@ -37,7 +37,7 @@
 				<section class="delete download homeworks" style="display: none;">
 					<label for="WorkTitle">作业内容：</label>
 					<select name="WorkTitle" id="WorkTitle">
-						<option id="Default" value="Default" selected="selected">--请选择要下载的作业--</option>
+						<option id="Default" value="Default" selected="selected">--请选择作业--</option>
 					</select>
 				</section>
 				<section>
