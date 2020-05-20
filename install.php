@@ -1,5 +1,5 @@
 <?php
-	if ($_POST["admin_password"] &&  $_POST["mysql_server"] && $_POST["mysql_database"] &&$_POST["mysql_username"] && $_POST["mysql_password"] && $_POST["upload_directory"] && $_POST["website_title"])
+	if ($_POST["admin_password"] && $_POST["mysql_server"] && $_POST["mysql_database"] &&$_POST["mysql_username"] && $_POST["mysql_password"] && $_POST["upload_directory"] && $_POST["website_title"])
 	{
 		$admin_password = htmlspecialchars($_POST["admin_password"]);
 		$mysql_server = htmlspecialchars($_POST["mysql_server"]);
@@ -18,7 +18,7 @@
 			header("HTTP/1.1 400 Bad Request");
 			die("The upload directory does not exists or it is not a directory!\n Location: " . $upload_directory);
 		}
-		$mysqlConnection = new mysqli($mysql_server, $mysql_username, $mysql_password, $mysql_database);
+		$mysqlConnection = new mysqli($mysql_server, $mysql_username, $mysql_password);
 		if ($mysqlConnection->connect_error)
 		{
 			header("HTTP/1.1 500 Internal Server Error");
@@ -47,15 +47,15 @@
 		$mysqlConnection->close();
 		// Save the configuration into local.php
 		$local = fopen("local.php", "w");
-		fwrite($local, "<?php");
-		fwrite($local, "\$admin_password = \"" . $admin_password . "\";");
-		fwrite($local, "\$mysql_server = \"" . $mysql_server . "\";");
-		fwrite($local, "\$mysql_database = \"" . $mysql_database . "\";");
-		fwrite($local, "\$mysql_username = \"" . $mysql_username . "\";");
-		fwrite($local, "\$mysql_password = \"" . $mysql_password . "\";");
-		fwrite($local, "\$upload_directory = \"" . $upload_directory . "\";");
-		fwrite($local, "\$website_title = \"" . $website_title . "\";");
-		fwrite($local, "?>");
+		fwrite($local, "<?php\n");
+		fwrite($local, "\$admin_password = \"" . $admin_password . "\";\n");
+		fwrite($local, "\$mysql_server = \"" . $mysql_server . "\";\n");
+		fwrite($local, "\$mysql_database = \"" . $mysql_database . "\";\n");
+		fwrite($local, "\$mysql_username = \"" . $mysql_username . "\";\n");
+		fwrite($local, "\$mysql_password = \"" . $mysql_password . "\";\n");
+		fwrite($local, "\$upload_directory = \"" . $upload_directory . "\";\n");
+		fwrite($local, "\$website_title = \"" . $website_title . "\";\n");
+		fwrite($local, "?>\n");
 		fclose($local);
 		unlink('install.php');
 		header("HTTP/1.1 302 Found");
@@ -82,7 +82,7 @@
 			<form action="install.php" method="post" enctype="multipart/form-data">
 				<section>
 					<label for="admin_password">管理员密码（用于修改信息/下载作业等操作）：</label>
-					<input type="text" name="admin_password" id="admin_password" placeholder="Admin Password" />
+					<input type="password" name="admin_password" id="admin_password" placeholder="Admin Password" />
 				</section>
 				<section>
 					<label for="mysql_server">MySQL服务器地址：</label>
@@ -98,7 +98,7 @@
 				</section>
 				<section>
 					<label for="mysql_password">MySQL服务器密码：</label>
-					<input type="text" name="mysql_password" id="mysql_password" placeholder="MySQL Password" />
+					<input type="password" name="mysql_password" id="mysql_password" placeholder="MySQL Password" />
 				</section>
 				<section>
 					<label for="upload_directory">上传目录（暂不支持Windows路径，用于存放作业）：</label>
