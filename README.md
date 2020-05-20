@@ -8,6 +8,7 @@ This is the server script for HOSS (Homework Online Submit System). It is a proj
 - `download.php`：提交下载表单、打包下载作业页面
 - `homework.php`：获取作业列表及提交人数页面（数据为JSON格式）
 - `index.php`：文件选择、上传页面（默认页面）
+- `install.php`：快速配置页面（仅初次安装时）
 - `local.php`：配置服务器参数页面（**需自行创建**，详见`配置文件`）
 - `modify.php`：提交修改表单、执行修改操作页面
 - `sql.php`：MySQL数据库对接函数
