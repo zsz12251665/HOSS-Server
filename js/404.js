@@ -1,87 +1,21 @@
-var CSSStyles = [
-	'animation: 28s float2 infinite;filter: blur(0.02px);font-size: 19px;left: 93.23%;top: 25.40%;',
-	'animation: 22s floatReverse2 infinite;filter: blur(0.04px);font-size: 19px;left: 70.66%;top: 19.54%;',
-	'animation: 28s floatReverse2 infinite;filter: blur(0.06px);font-size: 27px;left: 76.03%;top: 81.26%;',
-	'animation: 22s float2 infinite;filter: blur(0.08px);font-size: 15px;left: 28.57%;top: 95.21%;',
-	'animation: 33s float infinite;filter: blur(0.1px);font-size: 26px;left: 48.73%;top: 87.17%;',
-	'animation: 38s float infinite;filter: blur(0.12px);font-size: 12px;left: 20.75%;top: 89.66%;',
-	'animation: 29s float infinite;filter: blur(0.14px);font-size: 11px;left: 32.64%;top: 34.53%;',
-	'animation: 22s float2 infinite;filter: blur(0.16px);font-size: 19px;left: 70.66%;top: 34.19%;',
-	'animation: 31s float2 infinite;filter: blur(0.18px);font-size: 16px;left: 1.97%;top: 10.78%;',
-	'animation: 34s float2 infinite;filter: blur(0.2px);font-size: 16px;left: 0.98%;top: 12.75%;',
-	'animation: 35s floatReverse2 infinite;filter: blur(0.22px);font-size: 17px;left: 56.05%;top: 75.40%;',
-	'animation: 25s float2 infinite;filter: blur(0.24px);font-size: 27px;left: 43.82%;top: 79.32%;',
-	'animation: 34s floatReverse infinite;filter: blur(0.26px);font-size: 23px;left: 76.25%;top: 16.52%;',
-	'animation: 38s floatReverse2 infinite;filter: blur(0.28px);font-size: 15px;left: 44.33%;top: 36.32%;',
-	'animation: 39s floatReverse infinite;filter: blur(0.3px);font-size: 26px;left: 16.57%;top: 41.65%;',
-	'animation: 26s float infinite;filter: blur(0.32px);font-size: 20px;left: 93.14%;top: 91.71%;',
-	'animation: 40s floatReverse infinite;filter: blur(0.34px);font-size: 30px;left: 94.17%;top: 86.75%;',
-	'animation: 40s float2 infinite;filter: blur(0.36px);font-size: 17px;left: 20.65%;top: 81.27%;',
-	'animation: 30s float infinite;filter: blur(0.38px);font-size: 12px;left: 10.87%;top: 38.42%;',
-	'animation: 26s floatReverse2 infinite;filter: blur(0.4px);font-size: 27px;left: 73.03%;top: 82.22%;',
-	'animation: 30s float infinite;filter: blur(0.42px);font-size: 25px;left: 38.05%;top: 3.88%;',
-	'animation: 34s floatReverse infinite;filter: blur(0.44px);font-size: 23px;left: 60.61%;top: 46.66%;',
-	'animation: 39s float2 infinite;filter: blur(0.46px);font-size: 15px;left: 76.85%;top: 55.95%;',
-	'animation: 23s float infinite;filter: blur(0.48px);font-size: 11px;left: 83.09%;top: 4.93%;',
-	'animation: 29s float infinite;filter: blur(0.5px);font-size: 13px;left: 13.82%;top: 42.31%;',
-	'animation: 31s floatReverse infinite;filter: blur(0.52px);font-size: 15px;left: 15.76%;top: 72.64%;',
-	'animation: 29s floatReverse2 infinite;filter: blur(0.54px);font-size: 28px;left: 40.86%;top: 67.63%;',
-	'animation: 28s float infinite;filter: blur(0.56px);font-size: 30px;left: 62.14%;top: 49.16%;',
-	'animation: 26s floatReverse infinite;filter: blur(0.58px);font-size: 14px;left: 28.60%;top: 16.71%;',
-	'animation: 22s floatReverse2 infinite;filter: blur(0.6px);font-size: 25px;left: 96.59%;top: 68.85%;',
-	'animation: 27s floatReverse2 infinite;filter: blur(0.62px);font-size: 21px;left: 21.55%;top: 76.00%;',
-	'animation: 39s float infinite;filter: blur(0.64px);font-size: 16px;left: 0.98%;top: 61.76%;',
-	'animation: 29s floatReverse infinite;filter: blur(0.66px);font-size: 25px;left: 43.90%;top: 38.79%;',
-	'animation: 35s float infinite;filter: blur(0.68px);font-size: 11px;left: 59.35%;top: 62.15%;',
-	'animation: 36s floatReverse infinite;filter: blur(0.7px);font-size: 14px;left: 28.60%;top: 89.43%;',
-	'animation: 35s floatReverse infinite;filter: blur(0.72px);font-size: 26px;left: 82.85%;top: 36.80%;',
-	'animation: 28s floatReverse infinite;filter: blur(0.74px);font-size: 19px;left: 50.05%;top: 63.49%;',
-	'animation: 30s float infinite;filter: blur(0.76px);font-size: 23px;left: 92.86%;top: 71.93%;',
-	'animation: 39s float2 infinite;filter: blur(0.78px);font-size: 12px;left: 26.68%;top: 36.45%;',
-	'animation: 30s float infinite;filter: blur(0.8px);font-size: 28px;left: 78.79%;top: 54.11%;',
-	'animation: 35s float2 infinite;filter: blur(0.82px);font-size: 27px;left: 69.13%;top: 81.26%;',
-	'animation: 24s float2 infinite;filter: blur(0.84px);font-size: 30px;left: 35.92%;top: 87.71%;',
-	'animation: 27s floatReverse2 infinite;filter: blur(0.86px);font-size: 24px;left: 30.27%;top: 75.73%;',
-	'animation: 36s floatReverse2 infinite;filter: blur(0.88px);font-size: 16px;left: 57.09%;top: 19.80%;',
-	'animation: 37s floatReverse infinite;filter: blur(0.9px);font-size: 24px;left: 5.86%;top: 49.51%;',
-	'animation: 32s float infinite;filter: blur(0.92px);font-size: 28px;left: 36.96%;top: 58.94%;',
-	'animation: 36s floatReverse2 infinite;filter: blur(0.94px);font-size: 23px;left: 31.28%;top: 56.38%;',
-	'animation: 22s floatReverse2 infinite;filter: blur(0.96px);font-size: 16px;left: 29.53%;top: 32.35%;',
-	'animation: 24s floatReverse2 infinite;filter: blur(0.98px);font-size: 30px;left: 90.29%;top: 43.37%;',
-	'animation: 39s floatReverse2 infinite;filter: blur(1px);font-size: 27px;left: 55.50%;top: 6.77%;',
-	'animation: 23s floatReverse infinite;filter: blur(1.02px);font-size: 20px;left: 19.61%;top: 41.95%;',
-	'animation: 30s float infinite;filter: blur(1.04px);font-size: 27px;left: 92.50%;top: 55.14%;',
-	'animation: 35s floatReverse infinite;filter: blur(1.06px);font-size: 26px;left: 30.21%;top: 49.39%;',
-	'animation: 35s floatReverse infinite;filter: blur(1.08px);font-size: 12px;left: 4.94%;top: 15.76%;',
-	'animation: 28s floatReverse2 infinite;filter: blur(1.1px);font-size: 22px;left: 87.08%;top: 94.40%;',
-	'animation: 37s floatReverse2 infinite;filter: blur(1.12px);font-size: 15px;left: 46.31%;top: 80.49%;',
-	'animation: 38s float2 infinite;filter: blur(1.14px);font-size: 27px;left: 57.45%;top: 5.80%;',
-	'animation: 40s float2 infinite;filter: blur(1.16px);font-size: 22px;left: 68.49%;top: 64.23%;',
-	'animation: 25s floatReverse infinite;filter: blur(1.18px);font-size: 20px;left: 66.67%;top: 52.68%;',
-	'animation: 37s floatReverse2 infinite;filter: blur(1.2px);font-size: 12px;left: 87.94%;top: 14.78%;',
-	'animation: 26s floatReverse infinite;filter: blur(1.22px);font-size: 15px;left: 56.16%;top: 55.95%;',
-	'animation: 21s floatReverse infinite;filter: blur(1.24px);font-size: 23px;left: 86.02%;top: 57.35%;',
-	'animation: 36s float2 infinite;filter: blur(1.26px);font-size: 25px;left: 84.88%;top: 16.48%;',
-	'animation: 29s floatReverse2 infinite;filter: blur(1.28px);font-size: 18px;left: 81.53%;top: 67.48%;',
-	'animation: 25s float2 infinite;filter: blur(1.3px);font-size: 30px;left: 13.59%;top: 52.05%;',
-	'animation: 37s float2 infinite;filter: blur(1.32px);font-size: 27px;left: 4.87%;top: 91.90%;',
-	'animation: 32s floatReverse infinite;filter: blur(1.34px);font-size: 19px;left: 35.33%;top: 47.86%;',
-	'animation: 39s float2 infinite;filter: blur(1.36px);font-size: 23px;left: 64.52%;top: 10.69%;',
-	'animation: 33s floatReverse infinite;filter: blur(1.38px);font-size: 22px;left: 8.81%;top: 33.09%;',
-	'animation: 23s floatReverse2 infinite;filter: blur(1.4px);font-size: 11px;left: 66.27%;top: 83.85%;',
-	'animation: 21s floatReverse infinite;filter: blur(1.42px);font-size: 27px;left: 76.92%;top: 45.47%;',
-	'animation: 38s floatReverse2 infinite;filter: blur(1.44px);font-size: 13px;left: 87.86%;top: 67.90%;',
-	'animation: 32s float2 infinite;filter: blur(1.46px);font-size: 17px;left: 55.06%;top: 91.06%;',
-	'animation: 35s float infinite;filter: blur(1.48px);font-size: 17px;left: 5.90%;top: 85.19%;',
-	'animation: 25s floatReverse infinite;filter: blur(1.5px);font-size: 25px;left: 3.90%;top: 60.12%;',
-	'animation: 22s float2 infinite;filter: blur(1.52px);font-size: 26px;left: 14.62%;top: 65.86%;',
-	'animation: 34s float infinite;filter: blur(1.54px);font-size: 30px;left: 56.31%;top: 72.29%;',
-	'animation: 29s floatReverse infinite;filter: blur(1.56px);font-size: 28px;left: 71.98%;top: 50.24%;',
-	'animation: 21s floatReverse2 infinite;filter: blur(1.58px);font-size: 26px;left: 25.34%;top: 77.48%;',
-	'animation: 32s float infinite;filter: blur(1.6px);font-size: 24px;left: 69.34%;top: 0.97%;'
-];
+// Add the 4s and 0s to the background
 for (let i = 0; i < 40; ++i)
 {
-	document.querySelector('body').innerHTML += '<span style="' + CSSStyles[i] + '">4</span>';
-	document.querySelector('body').innerHTML += '<span style="' + CSSStyles[40 + i] + '">0</span>';
+	document.querySelector('body').innerHTML += '<span style="animation: ' + Math.floor(Math.random() * 20 + 20) + 's ' + animationFunction() + ' infinite;filter: blur(' + (0.04 * i + 0.02) + 'px);font-size: ' + Math.floor(Math.random() * 20 + 10) + 'px;left: ' + (Math.random() * 100) + '%;top: ' + (Math.random() * 100) + '%;">4</span>';
+	document.querySelector('body').innerHTML += '<span style="animation: ' + Math.floor(Math.random() * 20 + 20) + 's ' + animationFunction() + ' infinite;filter: blur(' + (0.04 * i + 0.04) + 'px);font-size: ' + Math.floor(Math.random() * 20 + 10) + 'px;left: ' + (Math.random() * 100) + '%;top: ' + (Math.random() * 100) + '%;">0</span>';
+}
+// The animation function generator
+function animationFunction()
+{
+	switch (Math.floor(Math.random() * 4))
+	{
+		case 0:
+			return 'float';
+		case 1:
+			return 'float2';
+		case 2:
+			return 'floatReverse';
+		default:
+			return 'floatReverse2';
+	}
 }
