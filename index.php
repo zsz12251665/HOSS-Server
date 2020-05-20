@@ -6,17 +6,20 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
-		<title>SCUT 2019计科全英联合班作业提交系统</title>
+		<title><?php require "local.php"; echo $website_title; ?></title>
 	</head>
 	<body>
 		<main>
-			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
+			<header>
+				<h1><?php require "local.php"; echo $website_title; ?></h1>
+			</header>
 			<h4>注意事项</h4>
 			<ul>
 				<li>每人每份作业只能提交一个文件；</li>
 				<li>提交新文件会覆盖掉旧文件；</li>
 				<li>如果要提交多个文件，请打包后再提交；</li>
-				<li><del>请不要尝试输入稀奇古怪的东西</del>{{{(&gt;_&lt;)}}}</li>
+				<li><del>请不要尝试输入稀奇古怪的东西；</del>{{{(&gt;_&lt;)}}}</li>
+				<li>有故障？请<a href="https://github.com/zsz12251665/HOSS-Server/issues/new">告诉我们</a>，或<a href="https://github.com/zsz12251665/HOSS-Server">前往项目</a>帮助我们改进。</li>
 			</ul>
 			<form action="javascript:void(0)" method="post" enctype="multipart/form-data">
 				<section>
@@ -45,6 +48,7 @@
 					</div>
 				</section>
 			</form>
+			<footer>&copy; 2020 <a href="https://github.com/whaohan">whaohan</a> &amp; <a href="https://github.com/zsz12251665">zsz12251665</a>. All rights reserved. </footer>
 		</main>
 		<script type="text/javascript" src="/js/index.js"></script>
 	</body>

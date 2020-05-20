@@ -51,6 +51,13 @@ div.progress div.strip
 	/* transition: width linear 0.1s; */
 	z-index: -1;
 }
+footer
+{
+	font-family: serif;
+	font-size: x-small;
+	font-style: italic;
+	text-align: center;
+}
 h1
 {
 	text-align: center;

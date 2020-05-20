@@ -6,11 +6,13 @@
 		<meta name="viewport" content="width=device-width" />
 		<link rel="shortcut icon" href="/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css" />
-		<title>SCUT 2019计科全英联合班作业提交系统</title>
+		<title><?php require "local.php"; echo $website_title; ?></title>
 	</head>
 	<body>
 		<main>
-			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
+			<header>
+				<h1><?php require "local.php"; echo $website_title; ?></h1>
+			</header>
 			<form action="download.php" method="post" enctype="multipart/form-data">
 				<section style="text-align: center;">
 					<input type="radio" name="Mode" id="Insert" value="Insert" checked="checked" />

@@ -24,11 +24,12 @@ This is the server script for HOSS (Homework Online Submit System). It is a proj
 
 ```php
 <?php
-	$admin_password = "[admin_password]";
-	$mysql_server = "[mysql_server]";
-	$mysql_username = "[mysql_username]";
-	$mysql_password = "[mysql_password]";
-	$upload_directory = "[upload_directory]"; // Slash required at the end
+	$admin_password = "[Admin Password]";
+	$mysql_server = "[MySQL Server]";
+	$mysql_username = "[MySQL Username]";
+	$mysql_password = "[MySQL Password]";
+	$upload_directory = "[Upload Directory]"; // Slash required at the end
+	$website_title = "[Website Title]";
 ?>
 ```
 
