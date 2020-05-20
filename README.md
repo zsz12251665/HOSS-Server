@@ -26,6 +26,7 @@ This is the server script for HOSS (Homework Online Submit System). It is a proj
 <?php
 	$admin_password = "[Admin Password]";
 	$mysql_server = "[MySQL Server]";
+	$mysql_database = "[MySQL Database]";
 	$mysql_username = "[MySQL Username]";
 	$mysql_password = "[MySQL Password]";
 	$upload_directory = "[Upload Directory]"; // Slash required at the end

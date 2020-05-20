@@ -84,7 +84,9 @@ function SubmitForm(e)
 		// console.log(xhr.status + ': ' xhr.responseText);
 		// Show the result
 		alert(xhr.responseText);
-		location.reload();
+		// Reset the data
+		document.querySelector('input#First').value = document.querySelector('input#Second').value = '';
+		document.querySelector('option#Default').selected = true;
 	};
 	// Send the request
 	xhr.send(form);

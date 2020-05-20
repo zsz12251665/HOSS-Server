@@ -1,3 +1,11 @@
+<?php
+	if (!file_exists("local.php"))
+	{
+		header("HTTP/1.1 302 Found");
+		header("Location: install.php");
+		die();
+	}
+?>
 <!DOCTYPE html>
 <html lang="zh">
 	<head>
@@ -50,6 +58,7 @@
 					<input type="submit" />
 				</section>
 			</form>
+			<footer>&copy; 2020 <a href="https://github.com/whaohan">whaohan</a> &amp; <a href="https://github.com/zsz12251665">zsz12251665</a>. All rights reserved. </footer>
 		</main>
 		<script type="text/javascript" src="/js/admin.js"></script>
 	</body>
