@@ -1,17 +1,19 @@
 <?php
+	$password = htmlspecialchars($_POST["Password"], ENT_QUOTES);
+	$title = htmlspecialchars($_POST["WorkTitle"], ENT_QUOTES);
 	require "local.php";
-	if ($_POST["DownloadAdmin"] != $admin_password)
+	if ($password != $admin_password)
 	{
 		header("HTTP/1.1 403 Forbidden");
 		die("Wrong Password! ");
 	}
-	$workDirectory = $upload_directory . $_POST["WorkTitle"] . "/";
+	$workDirectory = $upload_directory . $title . "/";
 	if (!is_dir($workDirectory))
 	{
 		header("HTTP/1.1 400 Bad Request");
-		die("Wrong directory: " . $_POST["WorkTitle"]);
+		die("Wrong directory: " . $title);
 	}
-	$zipPath = tempnam(sys_get_temp_dir(), $_POST["WorkTitle"]);
+	$zipPath = tempnam(sys_get_temp_dir(), $title);
 	$zip = new ZipArchive;
 	if ($zip->open($zipPath, ZipArchive::CREATE) === TRUE)
 	{
@@ -26,7 +28,7 @@
 		$zip->close();
 		header("Cache-Control: no-store");
 		header("Content-Description: File Transfer");
-		header("Content-Disposition: attachment; filename=" . $_POST["WorkTitle"] . ".zip");
+		header("Content-Disposition: attachment; filename=" . $title . ".zip");
 		header("Content-Length: " . filesize($zipPath));
 		header("Content-Transfer-Encoding: binary");
 		header("Content-Type: application/zip");

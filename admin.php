@@ -11,54 +11,44 @@
 	<body>
 		<main>
 			<h1>SCUT 2019计科全英联合班作业提交系统</h1>
-			<h4>下载作业</h4>
 			<form action="download.php" method="post" enctype="multipart/form-data">
-				<section>
+				<section style="text-align: center;">
+					<input type="radio" name="Mode" id="Insert" value="Insert" checked="checked" />
+					<label for="Insert">新建</label>
+					<input type="radio" name="Mode" id="Delete" value="Delete" />
+					<label for="Delete">删除</label>
+					<input type="radio" name="Mode" id="Download" value="Download" />
+					<label for="Download">下载</label>
+				</section>
+				<section class="insert delete homeworks students" style="text-align: center;">
+					<input type="radio" name="Target" id="Students" value="students" />
+					<label for="Students">学生</label>
+					<input type="radio" name="Target" id="Homeworks" value="homeworks" checked="checked" />
+					<label for="Homeworks">作业</label>
+				</section>
+				<section class="insert delete students">
+					<label for="First">作业内容/学生姓名：</label>
+					<input type="text" name="First" id="First" />
+				</section>
+				<section class="insert delete students">
+					<label for="Second">作业目录/学生学号：</label>
+					<input type="text" name="Second" id="Second" />
+				</section>
+				<section class="delete download homeworks" style="display: none;">
 					<label for="WorkTitle">作业内容：</label>
 					<select name="WorkTitle" id="WorkTitle">
-						<option value="Default" selected="selected">--请选择要下载的作业--</option>
-<?php
-	require "sql.php";
-	foreach (array_reverse($GLOBALS["homeworkList"]) as $homework)
-	{
-		require "local.php";
-		$localDirectory = $upload_directory . ($homework["directory"] ? $homework["directory"] : $homework["title"]) . "/";
-		$count = (file_exists($localDirectory) && is_dir($localDirectory)) ? count(scandir($localDirectory)) - 2 : 0;
-		$directory = htmlspecialchars($homework["directory"] ? $homework["directory"] : $homework["title"]);
-		$title = htmlspecialchars($homework["title"]);
-		echo "<option value=\"" . $directory . "\">" . $title . " (" . $count . ")</option>";
-	}
-?>
+						<option id="Default" value="Default" selected="selected">--请选择作业--</option>
 					</select>
 				</section>
 				<section>
-					<label for="DownloadAdmin">管理员密码：</label>
-					<input type="password" name="DownloadAdmin" id="DownloadAdmin" />
-				</section>
-				<section style="text-align: center;">
-					<input type="submit" />
-				</section>
-			</form>
-			<h4>修改信息</h4>
-			<form action="modify.php" method="post" enctype="multipart/form-data">
-				<section style="text-align: center;">
-					<input type="radio" name="Mode" id="NewWork" value="NewWork" />
-					<label for="NewWork">新建作业</label>
-					<input type="radio" name="Mode" id="DelWork" value="DelWork" />
-					<label for="DelWork">删除作业</label>
-				</section>
-				<section>
-					<label for="First">作业内容：</label>
-					<input type="text" name="First" id="First" />
-				</section>
-				<section>
-					<label for="ModifyAdmin">管理员密码：</label>
-					<input type="password" name="ModifyAdmin" id="ModifyAdmin" />
+					<label for="Password">管理员密码：</label>
+					<input type="password" name="Password" id="Password" />
 				</section>
 				<section style="text-align: center;">
 					<input type="submit" />
 				</section>
 			</form>
 		</main>
+		<script type="text/javascript" src="/js/admin.js"></script>
 	</body>
 </html>

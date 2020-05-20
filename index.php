@@ -31,15 +31,6 @@
 					<label for="WorkTitle">作业内容：</label>
 					<select name="WorkTitle" id="WorkTitle">
 						<option value="Default" selected="selected">--请选择要提交的作业--</option>
-<?php
-	require "sql.php";
-	foreach (array_reverse($GLOBALS["homeworkList"]) as $homework)
-	{
-		$directory = htmlspecialchars($homework["directory"] ? $homework["directory"] : $homework["title"]);
-		$title = htmlspecialchars($homework["title"]);
-		echo "<option value=\"" . $directory . "\">" . $title . "</option>";
-	}
-?>
 					</select>
 				</section>
 				<section>
@@ -55,6 +46,6 @@
 				</section>
 			</form>
 		</main>
-		<script type="text/javascript" src="/js/upload.js"></script>
+		<script type="text/javascript" src="/js/index.js"></script>
 	</body>
 </html>
