@@ -1,4 +1,12 @@
 <?php
+	// Check if installed
+	if (file_exists("local.php"))
+	{
+		header("HTTP/1.1 301 Moved Permanently");
+		header("Location: ./");
+		die();
+	}
+	// The form Submitted
 	if ($_POST["admin_password"] && $_POST["mysql_server"] && $_POST["mysql_database"] &&$_POST["mysql_username"] && $_POST["mysql_password"] && $_POST["upload_directory"] && $_POST["website_title"])
 	{
 		$admin_password = htmlspecialchars($_POST["admin_password"]);
@@ -57,7 +65,7 @@
 		fwrite($local, "\$website_title = \"" . $website_title . "\";\n");
 		fwrite($local, "?>\n");
 		fclose($local);
-		unlink('install.php');
+		// Jump to the home page
 		header("HTTP/1.1 302 Found");
 		header("Location: ./");
 		die();
