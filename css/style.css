@@ -27,7 +27,7 @@ body
 	align-items: center;
 	background-image: url("/img/background.png");
 	display: flex;
-	height: 100vh;
+	min-height: 100vh;
 	justify-content: center;
 	margin: 0;
 	padding: 0.5em;
@@ -48,7 +48,6 @@ div.progress div.strip
 	left: 0;
 	position: absolute;
 	top: 0;
-	/* transition: width linear 0.1s; */
 	z-index: -1;
 }
 footer
