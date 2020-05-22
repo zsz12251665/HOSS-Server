@@ -1,11 +1,5 @@
-// Add the 4s and 0s to the background
-for (let i = 0; i < 40; ++i)
-{
-	document.querySelector('body').innerHTML += '<span style="animation: ' + Math.floor(Math.random() * 20 + 20) + 's ' + animationFunction() + ' infinite;filter: blur(' + (0.04 * i + 0.02) + 'px);font-size: ' + Math.floor(Math.random() * 20 + 10) + 'px;left: ' + (Math.random() * 100) + '%;top: ' + (Math.random() * 100) + '%;">4</span>';
-	document.querySelector('body').innerHTML += '<span style="animation: ' + Math.floor(Math.random() * 20 + 20) + 's ' + animationFunction() + ' infinite;filter: blur(' + (0.04 * i + 0.04) + 'px);font-size: ' + Math.floor(Math.random() * 20 + 10) + 'px;left: ' + (Math.random() * 100) + '%;top: ' + (Math.random() * 100) + '%;">0</span>';
-}
 // The animation function generator
-function animationFunction()
+function animation()
 {
 	switch (Math.floor(Math.random() * 4))
 	{
@@ -18,4 +12,9 @@ function animationFunction()
 		default:
 			return 'floatReverse2';
 	}
+}
+// Add the 4s and 0s to the background
+for (let i = 1; i <= 80; ++i)
+{
+	document.querySelector('body').innerHTML += '<span style="animation: ' + Math.floor(Math.random() * 20 + 20) + 's ' + animation() + ' infinite;filter: blur(' + 0.02 * i + 'px);font-size: ' + Math.floor(Math.random() * 20 + 10) + 'px;left: ' + Math.random() * 100 + '%;top: ' + Math.random() * 100 + '%;">' + i % 2 * 4 + '</span>';
 }
