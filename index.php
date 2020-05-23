@@ -15,10 +15,11 @@
 			</header>
 			<h4>注意事项</h4>
 			<ul>
-				<li>每人每份作业只能提交一个文件；</li>
-				<li>提交新文件会覆盖掉旧文件；</li>
+				<li>本系统<strong>不支持基于IE内核（Trident）的浏览器</strong>（包括部分浏览器的“兼容模式”）；</li>
+				<li>请将您的浏览器切换至“极速模式”或使用我们推荐的浏览器，并将其更新至最新版本（<a href="https://github.com/zsz12251665/HOSS-Server/issues/3">详见此处</a>）；</li>
+				<li>每人每份作业只能提交一个文件，提交新文件会覆盖掉旧文件；</li>
 				<li>如果要提交多个文件，请打包后再提交；</li>
-				<li>因系统更新，若不能正常使用，请点击<a href="https://github.com/zsz12251665/HOSS-Server/issues">用户帮助</a>，或<a href="https://github.com/zsz12251665/HOSS-Server/issues/new">告诉我们</a></li>
+				<li>有问题？请<a href="https://github.com/zsz12251665/HOSS-Server/issues/new">告诉我们</a>，或<a href="https://github.com/zsz12251665/HOSS-Server">前往项目</a>帮助我们改进。</li>
 			</ul>
 			<form action="javascript:void(0)" method="post" enctype="multipart/form-data">
 				<section>
