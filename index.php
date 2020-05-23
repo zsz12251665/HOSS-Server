@@ -18,8 +18,7 @@
 				<li>每人每份作业只能提交一个文件；</li>
 				<li>提交新文件会覆盖掉旧文件；</li>
 				<li>如果要提交多个文件，请打包后再提交；</li>
-				<li><del>请不要尝试输入稀奇古怪的东西；</del>{{{(&gt;_&lt;)}}}</li>
-				<li>有故障？请<a href="https://github.com/zsz12251665/HOSS-Server/issues/new">告诉我们</a>，或<a href="https://github.com/zsz12251665/HOSS-Server">前往项目</a>帮助我们改进。</li>
+				<li>因系统更新，若不能正常使用，请点击<a href="https://github.com/zsz12251665/HOSS-Server/issues">用户帮助</a>，或<a href="https://github.com/zsz12251665/HOSS-Server/issues/new">告诉我们</a></li>
 			</ul>
 			<form action="javascript:void(0)" method="post" enctype="multipart/form-data">
 				<section>
