@@ -37,6 +37,7 @@ This is the server script for HOSS (Homework Online Submit System). It is a proj
 
 ## 注意事项
 
-1. MySQL数据库需使用UTF-8编码
-2. PHP文件传输上限需（在`php.ini`中）按需上调（[参考](https://www.php.cn/php-ask-430566.html)）
-3. 安装前请开放脚本相应目录及作业保存目录读写权限，以正确安装及上传文件
+1. 本系统**不支持基于IE内核（Trident）的浏览器**（包括部分浏览器的“兼容模式”）
+2. MySQL数据库需使用UTF-8编码
+3. PHP文件传输上限需（在`php.ini`中）按需上调（[参考](https://www.php.cn/php-ask-430566.html)）
+4. 安装前请开放脚本相应目录及作业保存目录读写权限，以正确安装及上传文件
