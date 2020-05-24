@@ -16,6 +16,11 @@
 		header("HTTP/1.1 400 Bad Request");
 		die("File Error: " . ($_FILES["WorkFile"] ? $_FILES["WorkFile"]["error"] : "No such file! "));
 	}
+	if (false) // If the upload date is later than the deadline, wait to be completed
+	{
+		header("HTTP/1.1 409 Conflict");
+		die("The homework is out of date! Server date: " . date("Y-m-d"));
+	}
 	else
 	{
 		// echo "Upload: " . $_FILES["WorkFile"]["name"];

@@ -47,7 +47,7 @@
 			header("HTTP/1.1 500 Internal Server Error");
 			die("Could not create data sheet \"students\"! Please resubmit the info! \nError: " . $mysqlConnection->error);
 		}
-		if (!$mysqlConnection->query("CREATE TABLE homeworks (title VARCHAR(255), directory VARCHAR(255))") || $mysqlConnection->error)
+		if (!$mysqlConnection->query("CREATE TABLE homeworks (title VARCHAR(255), directory VARCHAR(255), deadline VARCHAR(255))") || $mysqlConnection->error)
 		{
 			header("HTTP/1.1 500 Internal Server Error");
 			die("Could not create data sheet \"homeworks\"! Please resubmit the info! \nError: " . $mysqlConnection->error);

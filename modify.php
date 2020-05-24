@@ -2,8 +2,6 @@
 	$password = htmlspecialchars($_POST["Password"], ENT_QUOTES);
 	$target = htmlspecialchars($_POST["Target"], ENT_QUOTES);
 	$mode = htmlspecialchars($_POST["Mode"], ENT_QUOTES);
-	$firstColumn = htmlspecialchars($_POST["First"], ENT_QUOTES);
-	$secondColumn = htmlspecialchars($_POST["Second"], ENT_QUOTES);
 	require "local.php";
 	if ($password != $admin_password)
 	{
@@ -15,29 +13,39 @@
 	switch ($target)
 	{
 		case 'homeworks':
-			if (!$firstColumn)
+			$title = htmlspecialchars($_POST["Title"], ENT_QUOTES);
+			$directory = htmlspecialchars($_POST["Directory"], ENT_QUOTES);
+			$deadline = htmlspecialchars($_POST["Deadline"], ENT_QUOTES);
+			if (!$title)
 			{
 				header("HTTP/1.1 400 Bad Request");
 				die("Empty homework title! ");
 			}
-			if (!$secondColumn)
+			if (!$directory)
 			{
-				$secondColumn = $firstColumn;
+				$directory = $title;
 			}
-			if (preg_match("/[\\\/:*?\"<>|]/", $secondColumn))
+			if (preg_match("/[\\\/:*?\"<>|]/", $directory))
 			{
 				header("HTTP/1.1 400 Bad Request");
-				die("invalid directory name: " . $secondColumn);
+				die("invalid directory name: " . $directory);
 			}
-			$entry = $secondColumn ? array("title" => $firstColumn, "directory" => $secondColumn) : array("title" => $firstColumn);
+			if (!strtotime($deadline))
+			{
+				header("HTTP/1.1 400 Bad Request");
+				die("Invalid deadline: " . $deadline);
+			}
+			$entry = array("title" => $title, "directory" => $directory, "deadline" => $deadline);
 			break;
 		case 'students':
-			if (!$firstColumn || !$secondColumn)
+			$name = htmlspecialchars($_POST["Name"], ENT_QUOTES);
+			$number = htmlspecialchars($_POST["Number"], ENT_QUOTES);
+			if (!$name || !$number)
 			{
 				header("HTTP/1.1 400 Bad Request");
 				die("Empty student name or number! ");
 			}
-			$entry = array("name" => $firstColumn, "number" => $secondColumn);
+			$entry = array("name" => $name, "number" => $number);
 			break;
 		default:
 			header("HTTP/1.1 400 Bad Request");
@@ -49,7 +57,7 @@
 			if (selectInMysql($target, $entry))
 			{
 				header("HTTP/1.1 400 Bad Request");
-				die("Entry exists: (" . $firstColumn . ", " . $secondColumn . ") in " . $target);
+				die("Entry exists: " . json_encode($entry) . " in " . $target);
 			}
 			insertIntoMysql($target, $entry);
 			break;
@@ -57,7 +65,7 @@
 			if (!selectInMysql($target, $entry))
 			{
 				header("HTTP/1.1 400 Bad Request");
-				die("Entry doesn't exist: (" . $firstColumn . ", " . $secondColumn . ") in " . $target);
+				die("Entry doesn't exist: " . json_encode($entry) . " in " . $target);
 			}
 			deleteFromMysql($target, $entry);
 			break;

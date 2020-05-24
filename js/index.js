@@ -1,22 +1,10 @@
 function SubmitForm(e)
 {
 	e.preventDefault();
-	// Validate and the form data
+	// Reset the styles
+	document.querySelectorAll('input[type="text"]').forEach(input => input.className = '');
+	// Collect form data
 	let form = new FormData(document.querySelector('form'));
-	document.querySelectorAll('input[type="text"]').forEach(input => input.className = input.value ? '' : 'error');
-	if (!document.querySelector('input[type=file]').files.length)
-	{
-		document.querySelector('input[type=file]').className = 'error';
-	}
-	if (document.querySelector('select').selectedIndex == 0)
-	{
-		document.querySelector('select').className = 'error';
-	}
-	if (document.querySelector('input.error, select.error'))
-	{
-		alert('请正确填写表单！');
-		return;
-	}
 	// Submit the form via AJAX
 	let xhr = new XMLHttpRequest();
 	xhr.open('POST', 'upload.php', true);
@@ -38,6 +26,7 @@ function SubmitForm(e)
 		{
 			return;
 		}
+		// console.log(xhr.status + ': ' xhr.responseText);
 		// Invalid submit
 		if (xhr.status == 403)
 		{
@@ -47,7 +36,10 @@ function SubmitForm(e)
 		{
 			document.querySelector('input[type=file]').className = 'error';
 		}
-		// console.log(xhr.status + ': ' xhr.responseText);
+		if (xhr.status == 409)
+		{
+			document.querySelector('select').className = 'error';
+		}
 		// Enable the inputs and hide the progress bar
 		document.querySelectorAll('input, select').forEach(input => input.disabled = false);
 		document.querySelector('input#Submit').style.display = 'inline-block';
@@ -69,7 +61,7 @@ function SubmitForm(e)
 let xhr = new XMLHttpRequest();
 xhr.open('GET', 'homework.php', false);
 xhr.send();
-JSON.parse(xhr.responseText).forEach(homework => document.querySelector('select#WorkTitle').innerHTML += '<option value="' + homework.directory + '">' + homework.title + ' (' + homework.count + ')</option>');
+JSON.parse(xhr.responseText).forEach(homework => document.querySelector('select#WorkTitle').innerHTML += '<option value="' + homework.directory + '">' + homework.title + ' (' + homework.deadline + ')</option>');
 // Add event listeners
 document.querySelector('form').addEventListener('submit', SubmitForm);
 document.querySelectorAll('input, select').forEach(input => input.addEventListener('focus', e => e.target.className = ''));

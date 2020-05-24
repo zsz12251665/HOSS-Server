@@ -1,24 +1,8 @@
-function setDisplay(filter, display)
+function setDisplay(e)
 {
-	document.querySelectorAll(filter).forEach(section => section.style.display = display);
-}
-function displayMode(e)
-{
-	setDisplay('section[class]', 'none');
-	setDisplay('section.' + e.target.value.toLowerCase(), 'block');
+	document.querySelectorAll('section[class]').forEach(section => section.style.display = 'none');
+	document.querySelectorAll('section.' + document.querySelector('input[name="Mode"]:checked').value + '.' + document.querySelector('input[name="Target"]:checked').value).forEach(section => section.style.display = 'block');
 	document.querySelectorAll('section.insert input').forEach(input => input.disabled = (e.target.value == 'Download'));
-	if (e.target.value == 'Delete')
-	{
-		document.querySelector(document.querySelector('input#Students').checked ? 'input#Students' : 'input#Homeworks').click();
-	}
-}
-function displayTarget(e)
-{
-	if (document.querySelector('input#Delete').checked)
-	{
-		setDisplay('section.delete', 'none');
-		setDisplay('section.' + e.target.value, 'block');
-	}
 }
 function SubmitForm(e)
 {
@@ -56,12 +40,13 @@ function SubmitForm(e)
 	form.delete('WorkTitle');
 	if (form.get('Mode') == 'Delete' && form.get('Target') == 'homeworks')
 	{
-		form.set('First', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].title);
-		form.set('Second', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].directory);
+		form.set('Title', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].title);
+		form.set('Directory', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].directory);
+		form.set('Deadline', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].deadline);
 	}
-	if (form.get('Mode') == 'Insert' && form.get('Target') == 'homeworks' && !form.get('Second'))
+	if (form.get('Mode') == 'Insert' && form.get('Target') == 'homeworks' && !form.get('Directory'))
 	{
-		form.set('Second', form.get('First'));
+		form.set('Directory', form.get('Title'));
 	}
 	// Set the event when the upload completed
 	xhr.onreadystatechange = function ()
@@ -73,9 +58,8 @@ function SubmitForm(e)
 		// console.log(xhr.status + ': ' xhr.responseText);
 		// Show the result
 		alert(xhr.responseText);
-		// Reset the form
-		document.querySelector('input#First').value = document.querySelector('input#Second').value = document.querySelector('input#Password').value = '';
-		document.querySelector('option#Default').selected = true;
+		// Reset the password
+		document.querySelector('input#Password').value = '';
 	};
 	// Send the request
 	xhr.send(form);
@@ -88,5 +72,4 @@ var homeworkList = JSON.parse(xhr.responseText);
 homeworkList.forEach(homework => document.querySelector('select#WorkTitle').innerHTML += '<option value="' + homework.directory + '">' + homework.title + ' (' + homework.count + ')</option>');
 // Add event listeners
 document.querySelector('form').addEventListener('submit', SubmitForm);
-document.querySelectorAll('input[name="Mode"]').forEach(input => input.addEventListener('click', displayMode));
-document.querySelectorAll('input[name="Target"]').forEach(input => input.addEventListener('click', displayTarget));
+document.querySelectorAll('input[name="Mode"], input[name="Target"]').forEach(input => input.addEventListener('click', setDisplay));
