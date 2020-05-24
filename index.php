@@ -1,3 +1,11 @@
+<?php
+	if (!file_exists("local.php"))
+	{
+		header("HTTP/1.1 302 Found");
+		header("Location: install.php");
+		die();
+	}
+?>
 <!DOCTYPE html>
 <html lang="zh">
 	<head>

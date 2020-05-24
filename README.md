@@ -8,7 +8,8 @@ This is the server script for HOSS (Homework Online Submit System). It is a proj
 - `download.php`：提交下载表单、打包下载作业页面
 - `homework.php`：获取作业列表及提交人数页面（数据为JSON格式）
 - `index.php`：文件选择、上传页面（默认页面）
-- `local.php`：配置服务器参数页面（**需自行创建**，详见`配置文件`）
+- `install.php`：快速配置页面（仅初次安装时）
+- `local.php`：配置服务器参数页面（**安装时创建**，格式详见`配置文件格式`）
 - `modify.php`：提交修改表单、执行修改操作页面
 - `sql.php`：MySQL数据库对接函数
 - `upload.php`：上传表单提交、文件收容页面
@@ -18,7 +19,7 @@ This is the server script for HOSS (Homework Online Submit System). It is a proj
 - `css/`、`img/`、`js/`：样式表文件夹、图片资源文件夹及脚本文件夹
 - `favicon.ico`：网站图标
 
-## 配置文件
+## 配置文件格式
 
 `local.php`
 
@@ -26,6 +27,7 @@ This is the server script for HOSS (Homework Online Submit System). It is a proj
 <?php
 	$admin_password = "[Admin Password]";
 	$mysql_server = "[MySQL Server]";
+	$mysql_database = "[MySQL Database]";
 	$mysql_username = "[MySQL Username]";
 	$mysql_password = "[MySQL Password]";
 	$upload_directory = "[Upload Directory]"; // Slash required at the end
@@ -38,3 +40,4 @@ This is the server script for HOSS (Homework Online Submit System). It is a proj
 1. 本系统**不支持基于IE内核（Trident）的浏览器**（包括部分浏览器的“兼容模式”）
 2. MySQL数据库需使用UTF-8编码
 3. PHP文件传输上限需（在`php.ini`中）按需上调（[参考](https://www.php.cn/php-ask-430566.html)）
+4. 安装前请开放脚本相应目录及作业保存目录读写权限，以正确安装及上传文件

@@ -2,11 +2,11 @@
 	function connectAndSelect()
 	{
 		require "local.php";
-		$mysqlConnection = new mysqli($mysql_server, $mysql_username, $mysql_password, "homework");
+		$mysqlConnection = new mysqli($mysql_server, $mysql_username, $mysql_password, $mysql_database);
 		if ($mysqlConnection->connect_error)
 		{
 			header("HTTP/1.1 500 Internal Server Error");
-			die("Could not connect to MySQL database! Error: " . $mysqlConnection->connect_error);
+			die("Could not connect to MySQL server! Error: " . $mysqlConnection->connect_error);
 		}
 		return $mysqlConnection;
 	}
