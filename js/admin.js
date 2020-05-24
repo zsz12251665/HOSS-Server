@@ -1,7 +1,7 @@
 function setDisplay(e)
 {
 	document.querySelectorAll('section[class]').forEach(section => section.style.display = 'none');
-	document.querySelectorAll('section.' + document.querySelector('input[name="Mode"]:checked').value + '.' + document.querySelector('input[name="Target"]:checked').value).forEach(section => section.style.display = 'block');
+	document.querySelectorAll(('section.' + document.querySelector('input[name="Mode"]:checked').value + '.' + document.querySelector('input[name="Target"]:checked').value).toLowerCase()).forEach(section => section.style.display = 'block');
 	document.querySelectorAll('section.insert input').forEach(input => input.disabled = (e.target.value == 'Download'));
 }
 function SubmitForm(e)

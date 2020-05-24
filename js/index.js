@@ -61,7 +61,7 @@ function SubmitForm(e)
 let xhr = new XMLHttpRequest();
 xhr.open('GET', 'homework.php', false);
 xhr.send();
-JSON.parse(xhr.responseText).forEach(homework => document.querySelector('select#WorkTitle').innerHTML += '<option value="' + homework.directory + '">' + homework.title + ' (' + homework.deadline + ')</option>');
+JSON.parse(xhr.responseText).forEach(homework => document.querySelector('select#WorkTitle').innerHTML += Date.parse(homework.deadline) > Date.now() ? '<option value="' + homework.directory + '">' + homework.title + ' (' + homework.deadline + ')</option>': '');
 // Add event listeners
 document.querySelector('form').addEventListener('submit', SubmitForm);
 document.querySelectorAll('input, select').forEach(input => input.addEventListener('focus', e => e.target.className = ''));

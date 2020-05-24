@@ -38,7 +38,7 @@
 				</section>
 				<section class="insert homeworks">
 					<label for="Title">作业内容：</label>
-					<input type="text" name="Title" id="Title" required />
+					<input type="text" name="Title" id="Title" />
 				</section>
 				<section class="insert homeworks">
 					<label for="Directory">作业目录：</label>
@@ -46,15 +46,15 @@
 				</section>
 				<section class="insert homeworks">
 					<label for="Deadline">截止日期：</label>
-					<input type="date" name="Deadline" id="Deadline" pattern="\d{4}-\d{2}-\d{2}" required />
+					<input type="date" name="Deadline" id="Deadline" pattern="\d{4}-\d{2}-\d{2}" />
 				</section>
 				<section class="insert delete students" style="display: none;">
 					<label for="Name">学生姓名：</label>
-					<input type="text" name="Name" id="Name" required />
+					<input type="text" name="Name" id="Name" />
 				</section>
 				<section class="insert delete students" style="display: none;">
 					<label for="Number">学生学号：</label>
-					<input type="text" name="Number" id="Number" required />
+					<input type="text" name="Number" id="Number" />
 				</section>
 				<section class="delete download homeworks" style="display: none;">
 					<label for="WorkTitle">作业内容：</label>
