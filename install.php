@@ -16,7 +16,7 @@
 		$mysql_password = htmlspecialchars($_POST["mysql_password"]);
 		$upload_directory = htmlspecialchars($_POST["upload_directory"]);
 		$website_title = htmlspecialchars($_POST["website_title"]);
-		// Validator and initializer of the MySQL database
+		// Validate if the path is valid
 		if (substr($upload_directory, -1) != "/")
 		{
 			$upload_directory = $upload_directory . "/";
@@ -26,43 +26,47 @@
 			header("HTTP/1.1 400 Bad Request");
 			die("The upload directory does not exists or it is not a directory!\n Location: " . $upload_directory);
 		}
-		$mysqlConnection = new mysqli($mysql_server, $mysql_username, $mysql_password);
-		if ($mysqlConnection->connect_error)
+		// Validate and initialize the MySQL database
+		try
+		{
+			$mysqlConnection = new mysqli($mysql_server, $mysql_username, $mysql_password);
+			if ($mysqlConnection->connect_error)
+			{
+				throw new Exception("Could not connect to MySQL server! \nError: " . $mysqlConnection->connect_error);
+			}
+			if (!$mysqlConnection->query("CREATE DATABASE " . $mysql_database) || $mysqlConnection->error)
+			{
+				throw new Exception("Could not create MySQL database! \nError: " . $mysqlConnection->error);
+			}
+			if (!$mysqlConnection->select_db($mysql_database) || $mysqlConnection->error)
+			{
+				throw new Exception("Could not select MySQL database! \nError: " . $mysqlConnection->error);
+			}
+			if (!$mysqlConnection->query("CREATE TABLE students (name VARCHAR(255), number VARCHAR(255))") || $mysqlConnection->error)
+			{
+				throw new Exception("Could not create data sheet \"students\"! \nError: " . $mysqlConnection->error);
+			}
+			if (!$mysqlConnection->query("CREATE TABLE homeworks (title VARCHAR(255), directory VARCHAR(255), deadline VARCHAR(255))") || $mysqlConnection->error)
+			{
+				throw new Exception("Could not create data sheet \"homeworks\"! \nError: " . $mysqlConnection->error);
+			}
+			$mysqlConnection->close();
+		}
+		catch (Exception $err)
 		{
 			header("HTTP/1.1 500 Internal Server Error");
-			die("Could not connect to MySQL server! Please resubmit the info! \nError: " . $mysqlConnection->connect_error);
+			die($err->getMessage());
 		}
-		if (!$mysqlConnection->query("CREATE DATABASE " . $mysql_database) || $mysqlConnection->error)
-		{
-			header("HTTP/1.1 500 Internal Server Error");
-			die("Could not create MySQL database! Please resubmit the info! \nError: " . $mysqlConnection->error);
-		}
-		if (!$mysqlConnection->select_db($mysql_database) || $mysqlConnection->error)
-		{
-			header("HTTP/1.1 500 Internal Server Error");
-			die("Could not select MySQL database! Please resubmit the info! \nError: " . $mysqlConnection->error);
-		}
-		if (!$mysqlConnection->query("CREATE TABLE students (name VARCHAR(255), number VARCHAR(255))") || $mysqlConnection->error)
-		{
-			header("HTTP/1.1 500 Internal Server Error");
-			die("Could not create data sheet \"students\"! Please resubmit the info! \nError: " . $mysqlConnection->error);
-		}
-		if (!$mysqlConnection->query("CREATE TABLE homeworks (title VARCHAR(255), directory VARCHAR(255))") || $mysqlConnection->error)
-		{
-			header("HTTP/1.1 500 Internal Server Error");
-			die("Could not create data sheet \"homeworks\"! Please resubmit the info! \nError: " . $mysqlConnection->error);
-		}
-		$mysqlConnection->close();
-		// Save the configuration into local.php
+		// Save the configuration into "local.php"
 		$local = fopen("local.php", "w");
 		fwrite($local, "<?php\n");
-		fwrite($local, "\$admin_password = \"" . $admin_password . "\";\n");
-		fwrite($local, "\$mysql_server = \"" . $mysql_server . "\";\n");
-		fwrite($local, "\$mysql_database = \"" . $mysql_database . "\";\n");
-		fwrite($local, "\$mysql_username = \"" . $mysql_username . "\";\n");
-		fwrite($local, "\$mysql_password = \"" . $mysql_password . "\";\n");
-		fwrite($local, "\$upload_directory = \"" . $upload_directory . "\";\n");
-		fwrite($local, "\$website_title = \"" . $website_title . "\";\n");
+		fwrite($local, "\t\$admin_password = \"" . $admin_password . "\";\n");
+		fwrite($local, "\t\$mysql_server = \"" . $mysql_server . "\";\n");
+		fwrite($local, "\t\$mysql_database = \"" . $mysql_database . "\";\n");
+		fwrite($local, "\t\$mysql_username = \"" . $mysql_username . "\";\n");
+		fwrite($local, "\t\$mysql_password = \"" . $mysql_password . "\";\n");
+		fwrite($local, "\t\$upload_directory = \"" . $upload_directory . "\";\n");
+		fwrite($local, "\t\$website_title = \"" . $website_title . "\";\n");
 		fwrite($local, "?>\n");
 		fclose($local);
 		// Jump to the home page

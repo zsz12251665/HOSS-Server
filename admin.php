@@ -1,4 +1,5 @@
 <?php
+	// Check if installed
 	if (!file_exists("local.php"))
 	{
 		header("HTTP/1.1 302 Found");
@@ -23,36 +24,48 @@
 			</header>
 			<form action="download.php" method="post" enctype="multipart/form-data">
 				<section style="text-align: center;">
-					<input type="radio" name="Mode" id="Insert" value="Insert" checked="checked" />
+					<input type="radio" name="Mode" id="Insert" value="insert" checked />
 					<label for="Insert">新建</label>
-					<input type="radio" name="Mode" id="Delete" value="Delete" />
+					<input type="radio" name="Mode" id="Delete" value="delete" />
 					<label for="Delete">删除</label>
-					<input type="radio" name="Mode" id="Download" value="Download" />
+					<input type="radio" name="Mode" id="Download" value="download" />
 					<label for="Download">下载</label>
 				</section>
 				<section class="insert delete homeworks students" style="text-align: center;">
 					<input type="radio" name="Target" id="Students" value="students" />
 					<label for="Students">学生</label>
-					<input type="radio" name="Target" id="Homeworks" value="homeworks" checked="checked" />
+					<input type="radio" name="Target" id="Homeworks" value="homeworks" checked />
 					<label for="Homeworks">作业</label>
 				</section>
-				<section class="insert delete students">
-					<label for="First">作业内容/学生姓名：</label>
-					<input type="text" name="First" id="First" />
+				<section class="insert homeworks">
+					<label for="Title">作业内容：</label>
+					<input type="text" name="Title" id="Title" />
 				</section>
-				<section class="insert delete students">
-					<label for="Second">作业目录/学生学号：</label>
-					<input type="text" name="Second" id="Second" />
+				<section class="insert homeworks">
+					<label for="Directory">作业目录：</label>
+					<input type="text" name="Directory" id="Directory" />
+				</section>
+				<section class="insert homeworks">
+					<label for="Deadline">截止日期：</label>
+					<input type="date" name="Deadline" id="Deadline" pattern="\d{4}-\d{2}-\d{2}" />
+				</section>
+				<section class="insert delete students" style="display: none;">
+					<label for="Name">学生姓名：</label>
+					<input type="text" name="Name" id="Name" />
+				</section>
+				<section class="insert delete students" style="display: none;">
+					<label for="Number">学生学号：</label>
+					<input type="text" name="Number" id="Number" />
 				</section>
 				<section class="delete download homeworks" style="display: none;">
 					<label for="WorkTitle">作业内容：</label>
 					<select name="WorkTitle" id="WorkTitle">
-						<option id="Default" value="Default" selected="selected">--请选择作业--</option>
+						<option id="Default" value="" selected>--请选择作业--</option>
 					</select>
 				</section>
 				<section>
 					<label for="Password">管理员密码：</label>
-					<input type="password" name="Password" id="Password" />
+					<input type="password" name="Password" id="Password" required />
 				</section>
 				<section style="text-align: center;">
 					<input type="submit" />
