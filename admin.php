@@ -1,4 +1,5 @@
 <?php
+	// Check if installed
 	if (!file_exists("local.php"))
 	{
 		header("HTTP/1.1 302 Found");
