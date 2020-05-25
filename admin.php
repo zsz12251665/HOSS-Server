@@ -23,11 +23,11 @@
 			</header>
 			<form action="download.php" method="post" enctype="multipart/form-data">
 				<section style="text-align: center;">
-					<input type="radio" name="Mode" id="Insert" value="Insert" checked />
+					<input type="radio" name="Mode" id="Insert" value="insert" checked />
 					<label for="Insert">新建</label>
-					<input type="radio" name="Mode" id="Delete" value="Delete" />
+					<input type="radio" name="Mode" id="Delete" value="delete" />
 					<label for="Delete">删除</label>
-					<input type="radio" name="Mode" id="Download" value="Download" />
+					<input type="radio" name="Mode" id="Download" value="download" />
 					<label for="Download">下载</label>
 				</section>
 				<section class="insert delete homeworks students" style="text-align: center;">

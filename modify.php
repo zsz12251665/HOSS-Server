@@ -53,7 +53,7 @@
 	}
 	switch ($mode)
 	{
-		case "Insert":
+		case "insert":
 			if (selectInMysql($target, $entry))
 			{
 				header("HTTP/1.1 400 Bad Request");
@@ -61,7 +61,7 @@
 			}
 			insertIntoMysql($target, $entry);
 			break;
-		case "Delete":
+		case "delete":
 			if (!selectInMysql($target, $entry))
 			{
 				header("HTTP/1.1 400 Bad Request");

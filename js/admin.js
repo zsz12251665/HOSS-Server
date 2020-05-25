@@ -1,7 +1,7 @@
 function setDisplay(e)
 {
 	document.querySelectorAll('section[class]').forEach(section => section.style.display = 'none');
-	document.querySelectorAll(('section.' + document.querySelector('input[name="Mode"]:checked').value + '.' + document.querySelector('input[name="Target"]:checked').value).toLowerCase()).forEach(section => section.style.display = 'block');
+	document.querySelectorAll('section.' + document.querySelector('input[name="Mode"]:checked').value + (document.querySelector('input#Download').checked ? '' : '.' + document.querySelector('input[name="Target"]:checked').value)).forEach(section => section.style.display = 'block');
 	document.querySelectorAll('section.insert input').forEach(input => input.disabled = (e.target.value == 'Download'));
 }
 function SubmitForm(e)
@@ -24,6 +24,7 @@ function SubmitForm(e)
 		// Reset the form
 		document.querySelector('input#Password').value = '';
 		document.querySelector('option#Default').selected = true;
+		return;
 	}
 	// The modify events
 	// Validate the select
@@ -38,13 +39,13 @@ function SubmitForm(e)
 	// Fulfill the form data
 	let form = new FormData(document.querySelector('form'));
 	form.delete('WorkTitle');
-	if (form.get('Mode') == 'Delete' && form.get('Target') == 'homeworks')
+	if (form.get('Mode') == 'delete' && form.get('Target') == 'homeworks')
 	{
 		form.set('Title', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].title);
 		form.set('Directory', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].directory);
 		form.set('Deadline', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].deadline);
 	}
-	if (form.get('Mode') == 'Insert' && form.get('Target') == 'homeworks' && !form.get('Directory'))
+	if (form.get('Mode') == 'insert' && form.get('Target') == 'homeworks' && !form.get('Directory'))
 	{
 		form.set('Directory', form.get('Title'));
 	}
@@ -58,8 +59,8 @@ function SubmitForm(e)
 		// console.log(xhr.status + ': ' xhr.responseText);
 		// Show the result
 		alert(xhr.responseText);
-		// Reset the password
-		document.querySelector('input#Password').value = '';
+		// Reload the page
+		location.reload();
 	};
 	// Send the request
 	xhr.send(form);
