@@ -40,14 +40,17 @@ function SubmitForm(e)
 		{
 			document.querySelector('select').className = 'error';
 		}
+		// Reset the form if success
+		if(xhr.status == 200)
+		{
+			document.querySelector('form').reset();
+		}
 		// Enable the inputs and hide the progress bar
 		document.querySelectorAll('input, select').forEach(input => input.disabled = false);
 		document.querySelector('input#Submit').style.display = 'inline-block';
 		document.querySelector('div#Progress').style.display = 'none';
 		// Show the result
 		alert(xhr.responseText);
-		// Reset the form
-		document.querySelector('form').reset();
 	};
 	// Disable the inputs and show the progress bar
 	document.querySelectorAll('input, select').forEach(input => input.disabled = true);
