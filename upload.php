@@ -16,7 +16,7 @@
 		die("File Error: " . ($_FILES["WorkFile"] ? $_FILES["WorkFile"]["error"] : "No such file! "));
 	}
 	// If the upload date is later than the deadline
-	if (strtotime(selectInMysql("homeworks", array("title" => $workTitle))[0].deadline) < time())
+	if (strtotime(selectInMysql("homeworks", array("directory" => $workTitle))[0]["deadline"] . " 23:59:59") < time())
 	{
 		header("HTTP/1.1 409 Conflict");
 		die("The homework is out of date! Server date: " . date("Y-m-d"));
