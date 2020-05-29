@@ -24,7 +24,7 @@
 	}
 	foreach (scandir($workDirectory) as $fileName)
 	{
-		if ($fileName != "." && fileName!= ".." && !is_dir($workDirectory . $fileName))
+		if ($fileName != "." && $fileName!= ".." && !is_dir($workDirectory . $fileName))
 		{
 			$zip->addFile($workDirectory . $fileName, $fileName);
 		}
