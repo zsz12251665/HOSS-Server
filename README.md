@@ -13,6 +13,7 @@ This is the server script for HOSS (Homework Online Submit System). It is a proj
 - `modify.php`：提交修改表单、执行修改操作页面
 - `sql.php`：MySQL数据库对接函数
 - `upload.php`：上传表单提交、文件收容页面
+- `verify.php`：验证学生是否上传作业页面
 - `404.html`：404错误页面
 - `README.md`、`LICENCE`：说明文档与开源协议
 - `.htaccess`、`.gitignore`：apache与git相关文件

@@ -9,6 +9,12 @@
 		header("HTTP/1.1 403 Forbidden");
 		die("Authorization Error: " . $studentName . " (" . $studentNumber . ") is not our student! ");
 	}
+	// If there is no such homework
+	if (!selectInMysql("homeworks", array("directory" => $workTitle)))
+	{
+		header("HTTP/1.1 403 Forbidden");
+		die("No such homework: " . $workTitle . "does not exists! ");
+	}
 	// If failed to receive the file
 	if (!$_FILES["WorkFile"] || $_FILES["WorkFile"]["error"])
 	{
@@ -40,7 +46,7 @@
 	if (move_uploaded_file($_FILES["WorkFile"]["tmp_name"], $savingLocation))
 	{
 		header("HTTP/1.1 200 OK");
-		echo "Upload successfully! ";
+		die("Upload successfully! ");
 	}
 	else
 	{
