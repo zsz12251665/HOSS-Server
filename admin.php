@@ -38,7 +38,7 @@
 					<label for="Homeworks">作业</label>
 				</section>
 				<section class="insert homeworks">
-					<label for="Title">作业内容：</label>
+					<label for="Title">作业标题：</label>
 					<input type="text" name="Title" id="Title" />
 				</section>
 				<section class="insert homeworks">
@@ -58,8 +58,8 @@
 					<input type="text" name="Number" id="Number" />
 				</section>
 				<section class="delete download homeworks" style="display: none;">
-					<label for="WorkTitle">作业内容：</label>
-					<select name="WorkTitle" id="WorkTitle">
+					<label for="Target">作业内容：</label>
+					<select name="Target" id="Target">
 						<option id="Default" value="" selected>--请选择作业--</option>
 					</select>
 				</section>

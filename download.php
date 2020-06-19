@@ -1,6 +1,6 @@
 <?php
 	$password = htmlspecialchars($_POST["Password"], ENT_QUOTES);
-	$title = htmlspecialchars($_POST["WorkTitle"], ENT_QUOTES);
+	$directory = htmlspecialchars($_POST["Target"], ENT_QUOTES);
 	require "local.php";
 	if ($password != $admin_password)
 	{
@@ -8,14 +8,14 @@
 		die("Wrong Password! ");
 	}
 	// Validate the target path
-	$workDirectory = $upload_directory . $title . "/";
+	$workDirectory = $upload_directory . $directory . "/";
 	if (!is_dir($workDirectory))
 	{
 		header("HTTP/1.1 400 Bad Request");
-		die("Not directory: " . $title);
+		die("Not directory: " . $directory);
 	}
 	// Zip the homework files
-	$zipPath = tempnam(sys_get_temp_dir(), $title);
+	$zipPath = tempnam(sys_get_temp_dir(), $directory);
 	$zip = new ZipArchive;
 	if ($zip->open($zipPath, ZipArchive::CREATE) !== TRUE)
 	{
@@ -33,7 +33,7 @@
 	// Output the zip file
 	header("Cache-Control: no-store");
 	header("Content-Description: File Transfer");
-	header("Content-Disposition: attachment; filename=" . $title . ".zip");
+	header("Content-Disposition: attachment; filename=" . $directory . ".zip");
 	header("Content-Length: " . filesize($zipPath));
 	header("Content-Transfer-Encoding: binary");
 	header("Content-Type: application/zip");

@@ -15,7 +15,7 @@ function SubmitForm(e)
 		{
 			alert('请选择要下载的作业！');
 		}
-		if (homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].count == 0)
+		if (homeworkList[document.querySelector('select#Target').selectedIndex - 1].count == 0)
 		{
 			alert('暂时无人提交此作业，无法下载！');
 		}
@@ -38,12 +38,12 @@ function SubmitForm(e)
 	xhr.open('POST', 'modify.php', true);
 	// Fulfill the form data
 	let form = new FormData(document.querySelector('form'));
-	form.delete('WorkTitle');
+	form.delete('Target');
 	if (form.get('Mode') == 'delete' && form.get('Target') == 'homeworks')
 	{
-		form.set('Title', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].title);
-		form.set('Directory', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].directory);
-		form.set('Deadline', homeworkList[document.querySelector('select#WorkTitle').selectedIndex - 1].deadline);
+		form.set('Title', homeworkList[document.querySelector('select#Target').selectedIndex - 1].title);
+		form.set('Directory', homeworkList[document.querySelector('select#Target').selectedIndex - 1].directory);
+		form.set('Deadline', homeworkList[document.querySelector('select#Target').selectedIndex - 1].deadline);
 	}
 	if (form.get('Mode') == 'insert' && form.get('Target') == 'homeworks' && !form.get('Directory'))
 	{
@@ -70,7 +70,7 @@ let xhr = new XMLHttpRequest();
 xhr.open('GET', 'homework.php', false);
 xhr.send();
 var homeworkList = JSON.parse(xhr.responseText);
-homeworkList.forEach(homework => document.querySelector('select#WorkTitle').innerHTML += '<option value="' + homework.directory + '">' + homework.title + ' (' + homework.count + ')</option>');
+homeworkList.forEach(homework => document.querySelector('select#Target').innerHTML += '<option value="' + homework.directory + '">' + homework.title + ' (' + homework.count + ')</option>');
 // Add event listeners
 document.querySelector('form').addEventListener('submit', SubmitForm);
 document.querySelectorAll('input[name="Mode"], input[name="Target"]').forEach(input => input.addEventListener('click', setDisplay));

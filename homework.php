@@ -1,6 +1,6 @@
 <?php
-	$studentName = htmlspecialchars($_POST["StuName"], ENT_QUOTES);
-	$studentNumber = htmlspecialchars($_POST["StuNumber"], ENT_QUOTES);
+	$name = htmlspecialchars($_POST["Name"], ENT_QUOTES);
+	$number = htmlspecialchars($_POST["Number"], ENT_QUOTES);
 	require "sql.php";
 	// Get the list from MySQL database
 	$homeworkList = array_reverse(selectInMysql("homeworks"));
@@ -16,11 +16,11 @@
 		$fileList = file_exists($localDirectory) && is_dir($localDirectory) ? scandir($localDirectory) : array(".", "..");
 		$homework["count"] = count($fileList) - 2;
 		$homework["checked"] = false;
-		if ($studentName && $studentNumber && $homework["count"] > 0)
+		if ($name && $number && $homework["count"] > 0)
 		{
 			foreach ($fileList as $filename)
 			{
-				if (strpos($filename, $studentNumber . "-" . $studentName) === 0)
+				if (strpos($filename, $number . "-" . $name) === 0)
 				{
 					$homework["checked"] = true;
 					break;

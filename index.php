@@ -32,22 +32,22 @@
 			</ul>
 			<form action="javascript:void(0)" method="post" enctype="multipart/form-data">
 				<section>
-					<label for="StuName">学生姓名：</label>
-					<input type="text" name="StuName" id="StuName" required />
+					<label for="Name">学生姓名：</label>
+					<input type="text" name="Name" id="Name" required />
 				</section>
 				<section>
-					<label for="StuNumber">学生学号：</label>
-					<input type="text" name="StuNumber" id="StuNumber" required />
+					<label for="Number">学生学号：</label>
+					<input type="text" name="Number" id="Number" required />
 				</section>
 				<section>
-					<label for="WorkTitle">作业内容：</label>
-					<select name="WorkTitle" id="WorkTitle" required>
+					<label for="Directory">作业内容：</label>
+					<select name="Directory" id="Directory" required>
 						<option value="" selected>--请选择要提交的作业--</option>
 					</select>
 				</section>
 				<section>
-					<label for="WorkFile">作业文件：</label>
-					<input type="file" name="WorkFile" id="WorkFile" required />
+					<label for="File">作业文件：</label>
+					<input type="file" name="File" id="File" required />
 				</section>
 				<section style="text-align: center;">
 					<input type="submit" name="Submit" id="Submit" />
