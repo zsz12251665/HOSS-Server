@@ -58,8 +58,8 @@
 					<input type="text" name="Number" id="Number" />
 				</section>
 				<section class="delete download homeworks" style="display: none;">
-					<label for="Target">作业内容：</label>
-					<select name="Target" id="Target">
+					<label for="Select">作业内容：</label>
+					<select name="Select" id="Select">
 						<option id="Default" value="" selected>--请选择作业--</option>
 					</select>
 				</section>

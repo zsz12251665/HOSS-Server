@@ -1,6 +1,6 @@
 <?php
 	$password = htmlspecialchars($_POST["Password"], ENT_QUOTES);
-	$directory = htmlspecialchars($_POST["Target"], ENT_QUOTES);
+	$directory = htmlspecialchars($_POST["Select"], ENT_QUOTES);
 	require "local.php";
 	if ($password != $admin_password)
 	{
